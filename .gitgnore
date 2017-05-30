@@ -1,0 +1,24 @@
+#dotnet
+/dotnet/bin
+/dotnet/obj
+
+#java
+/java/.gradle
+/java/bin
+/java/build
+
+#nodejs
+/nodejs/modules
+
+# Misc
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
