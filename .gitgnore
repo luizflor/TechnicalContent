@@ -1,6 +1,6 @@
 #dotnet
-/dotnet/bin
-/dotnet/obj
+/dotnet/todo/bin
+/dotnet/todo/obj
 
 #java
 /java/.gradle
@@ -8,7 +8,7 @@
 /java/build
 
 #nodejs
-/nodejs/modules
+/nodejs/node_modules
 
 # Misc
 .DS_Store
