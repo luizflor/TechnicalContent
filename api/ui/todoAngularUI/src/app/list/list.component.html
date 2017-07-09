@@ -1,0 +1,12 @@
+<table class="table table-striped table-border table-hover">
+  <tr>
+    <th>Id</th>
+    <th>Todo</th>
+    <th>Is Done?</th>
+   </tr>
+  <tr *ngFor="let t of todos">
+    <td>{{t.id}}</td>
+    <td>{{t.todo}}</td>
+    <td>{{t.isDone}}</td>
+  </tr>
+</table>

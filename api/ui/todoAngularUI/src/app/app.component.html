@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav">
+        <li routerLinkActive="active"><a [routerLink]="['add']">Add</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['delete']">Delete</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['retrieve']">Retrieve</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['update']">Update</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['list']">List</a></li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
