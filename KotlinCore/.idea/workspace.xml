@@ -59,11 +59,9 @@
       <file leaf-file-name="Main.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/core/kotlin/Linq/Main.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-              <folding>
-                <element signature="e#26#161#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="38">
+              <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -870,15 +868,16 @@
       <updated>1511828119339</updated>
       <workItem from="1511828120915" duration="11804000" />
       <workItem from="1511885960661" duration="3171000" />
-      <workItem from="1511895017318" duration="387000" />
+      <workItem from="1511895017318" duration="991000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15362000" />
+    <option name="totallyTimeSpent" value="15966000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="75" y="77" width="1334" height="1177" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -936,7 +935,7 @@
         <state relative-caret-position="76">
           <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="18" />
           <folding>
-            <element signature="e#26#108#0" expanded="true" />
+            <element signature="e#26#108#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -962,7 +961,7 @@
         <state relative-caret-position="76">
           <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="14" />
           <folding>
-            <element signature="e#26#106#0" expanded="true" />
+            <element signature="e#26#106#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -972,7 +971,7 @@
         <state relative-caret-position="171">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding>
-            <element signature="e#26#149#0" expanded="true" />
+            <element signature="e#26#149#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1164,7 +1163,7 @@
         <state relative-caret-position="779">
           <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
           <folding>
-            <element signature="e#26#148#0" expanded="true" />
+            <element signature="e#26#148#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1187,6 +1186,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="100" column="28" lean-forward="true" selection-start-line="100" selection-start-column="28" selection-end-line="100" selection-end-column="28" />
+          <folding>
+            <element signature="e#242#592#0" expanded="true" />
+            <element signature="e#630#5958#2" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1211,7 +1214,7 @@
         <state relative-caret-position="76">
           <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="18" />
           <folding>
-            <element signature="e#26#108#0" expanded="true" />
+            <element signature="e#26#108#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1229,7 +1232,7 @@
         <state relative-caret-position="2223">
           <caret line="119" column="74" lean-forward="false" selection-start-line="119" selection-start-column="74" selection-end-line="119" selection-end-column="74" />
           <folding>
-            <element signature="e#27#128#0" expanded="true" />
+            <element signature="e#27#128#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1247,7 +1250,7 @@
         <state relative-caret-position="76">
           <caret line="5" column="14" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="14" />
           <folding>
-            <element signature="e#26#106#0" expanded="true" />
+            <element signature="e#26#106#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1257,7 +1260,7 @@
         <state relative-caret-position="76">
           <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
           <folding>
-            <element signature="e#26#127#0" expanded="true" />
+            <element signature="e#26#127#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1274,7 +1277,7 @@
         <state relative-caret-position="95">
           <caret line="5" column="62" lean-forward="false" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
           <folding>
-            <element signature="e#26#149#0" expanded="true" />
+            <element signature="e#26#149#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1284,7 +1287,7 @@
         <state relative-caret-position="133">
           <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="14" />
           <folding>
-            <element signature="e#26#169#0" expanded="true" />
+            <element signature="e#26#169#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1317,11 +1320,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/core/kotlin/Linq/Main.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding>
-            <element signature="e#26#161#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="38">
+          <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
