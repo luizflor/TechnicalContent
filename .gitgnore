@@ -22,3 +22,7 @@ npm-debug.log*
 pids
 *.pid
 *.seed
+
+*.class
+out/
+build/
