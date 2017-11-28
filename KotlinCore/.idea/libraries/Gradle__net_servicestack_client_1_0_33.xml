@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.servicestack:client:1.0.33">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.servicestack/client/1.0.33/9aa95e459da65ad91afd039ac3a9a07b77e7e270/client-1.0.33.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.servicestack/client/1.0.33/ead450019114c924af8f899c932b7f142700faa2/client-1.0.33-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
