@@ -14,6 +14,7 @@ class SwaggerConfiguration {
     fun api(): Docket = Docket(DocumentationType.SWAGGER_2)
             .select()
             .apis(RequestHandlerSelectors.any())
+         //   .apis(RequestHandlerSelectors.basePackage("net.todo.controllers"))
             .paths(PathSelectors.any())
             .build()
 }

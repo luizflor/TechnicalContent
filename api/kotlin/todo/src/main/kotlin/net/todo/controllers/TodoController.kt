@@ -1,5 +1,6 @@
 package net.todo.controllers
 
+import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import net.todo.model.Todo
 import org.springframework.http.HttpStatus
@@ -10,7 +11,7 @@ import net.todo.repository.TodoRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
-
+@Api(basePath = "/api", value = "Landlords", description = "Operations with Landlords", produces = "application/json")
 @RestController
 @RequestMapping("/api")
 class TodoController {
