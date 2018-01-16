@@ -1,5 +1,6 @@
 package net.todo.security
 
+import net.todo.security.SecurityConstants.ANGULAR
 import net.todo.security.SecurityConstants.LOGIN_URL
 import net.todo.security.SecurityConstants.SIGN_UP_URL
 import net.todo.user.UserDetailsServiceImpl
@@ -26,14 +27,22 @@ class WebSecurity(private val userDetailsService: UserDetailsServiceImpl, privat
         http.csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_URL).permitAll()
-                .antMatchers(HttpMethod.GET, "/",
+                //.antMatchers(HttpMethod.POST, *ANGULAR).permitAll()
+                .antMatchers(HttpMethod.GET, "/*",
+                        "/favicon.ico",
                         "/index.html",
                         "/polyfills.bundle.js",
                         "/styles.bundle.js",
                         "/vendor.bundle.js",
                         "/main.bundle.js",
                         "/inline.bundle.js").permitAll()
-                //.antMatchers(HttpMethod.GET,"/**","/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
+            //    .antMatchers(HttpMethod.GET,"/**","/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(CorsFilter(), SessionManagementFilter::class.java)

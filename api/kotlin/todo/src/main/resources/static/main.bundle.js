@@ -116,7 +116,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-2\">\n      <ul class=\"nav\">\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['login']\">Login</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['add']\">Add</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['delete']\">Delete</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['retrieve']\">Retrieve</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['update']\">Update</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['list']\">List</a></li>\n\n      </ul>\n    </div>\n    <div class=\"col-md-10\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-md-2\">\n      <ul class=\"nav\">\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['login']\">Login</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['add']\">Add</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['delete']\">Delete</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['retrieve']\">Retrieve</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['update']\">Update</a></li>\n        <li routerLinkActive=\"active\"><a [routerLink]=\"['list']\">List</a></li>\n        <li><a href=\"/swagger-ui.html\">Swagger</a></li>\n\n      </ul>\n    </div>\n    <div class=\"col-md-10\">\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -169,7 +169,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__retrieve_retrieve_component__ = __webpack_require__("../../../../../src/app/retrieve/retrieve.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__todo_service__ = __webpack_require__("../../../../../src/app/todo.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__ = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__loggin_loggin_component__ = __webpack_require__("../../../../../src/app/loggin/loggin.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__login_loggin_component__ = __webpack_require__("../../../../../src/app/login/loggin.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__token_token_component__ = __webpack_require__("../../../../../src/app/token/token.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__auth_auth_service__ = __webpack_require__("../../../../../src/app/auth/auth.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__auth_AuthGuard__ = __webpack_require__("../../../../../src/app/auth/AuthGuard.ts");
@@ -196,6 +196,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+// import {StompConfig, StompService} from '@stomp/ng2-stompjs';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -209,7 +210,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_9__delete_delete_component__["a" /* DeleteComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__retrieve_retrieve_component__["a" /* RetrieveComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__signup_signup_component__["a" /* SignupComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__loggin_loggin_component__["a" /* LogginComponent */],
+                __WEBPACK_IMPORTED_MODULE_13__login_loggin_component__["a" /* LogginComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__token_token_component__["a" /* TokenComponent */]
             ],
             imports: [
@@ -289,15 +290,12 @@ var AuthService = (function () {
         configurable: true
     });
     AuthService.prototype.setToken = function (token) {
-        //  const token = (jwtDecode(this.token.token));
-        // const userName = (jwtDecode(this.token.token).sub;
-        // const expirationSeconds = (new Date(token.exp * 1000).getTime() - new Date().getTime()) / 1000;
-        // console.log(expirationSeconds, userName);
         this._token = token.token;
         var tokenParse = __WEBPACK_IMPORTED_MODULE_0_jwt_decode__(token.token);
         var userName = tokenParse['sub'];
+        var scope = tokenParse['scope'];
         var expirationSeconds = (new Date(tokenParse['exp'] * 1000).getTime() - new Date().getTime()) / 1000;
-        console.log(expirationSeconds, userName);
+        console.log('[AuthService]', expirationSeconds, userName, scope);
     };
     AuthService.prototype.logout = function () {
         this._token = '';
@@ -454,15 +452,55 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ListComponent = (function () {
     function ListComponent(todoService) {
         this.todoService = todoService;
+        // constructor(private todoService: TodoService, private stomp: StompService) {
+        // }
+        //response
+        this.response = function (data) {
+            console.log(data);
+        };
     }
     ListComponent.prototype.ngOnInit = function () {
         this.getTodos();
+        this.stompSetup();
+    };
+    // Stream of messages
+    ListComponent.prototype.stompSetup = function () {
+        /*
+        //configuration
+        this.stomp.configure({
+          host: 'localhost:3030',
+          debug: true,
+          queue: {'init': false}
+        });
+    
+        //start connection
+        this.stomp.startConnect().then(() => {
+          this.stomp.done('init');
+          console.log('connected');
+    
+          //subscribe
+          this.subscription = stomp.subscribe('/stomp', this.response);
+    
+          //send data
+          this.stomp.send('destionation', {'data': 'data'});
+    
+          //unsubscribe
+          this.subscription.unsubscribe();
+    
+          //disconnect
+          this.stomp.disconnect().then(() => {
+            console.log( 'Connection closed' );
+          });
+    
+        });
+        */
     };
     ListComponent.prototype.getTodos = function () {
         var _this = this;
         this.todoService.getTodos().subscribe(function (data) {
-            if (data.length == 0) {
-                _this.setup();
+            if (data.length === 0) {
+                //this.setup();
+                return;
             }
             _this.todos = data;
         }, function (e) {
@@ -492,7 +530,7 @@ var ListComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/loggin/loggin.component.css":
+/***/ "../../../../../src/app/login/loggin.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
@@ -510,14 +548,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ "../../../../../src/app/loggin/loggin.component.html":
+/***/ "../../../../../src/app/login/loggin.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<td-token *ngIf=\"!showLogin()\"></td-token>\n<div class=\"row\" *ngIf=\"showLogin()\">\n  <div class=\"col-xs-12\">\n    <form id=\"add\" (ngSubmit)=\"onLoggin()\">\n      <div class=\"row\">\n        <div class=\"col-sm-8 form-group\">\n          <label for=\"username\">User Name:</label>\n          <input type=\"text\"\n                 class=\"form-control\"\n                 id=\"username\"\n                 name=\"username\"\n                 [(ngModel)]=\"user.username\"\n          >\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-sm-8 form-group\">\n          <label for=\"password\">Password:</label>\n          <input type=\"text\"\n                 class=\"form-control\"\n                 id=\"password\"\n                 name=\"password\"\n                 [(ngModel)]=\"user.password\"\n          >\n        </div>\n      </div>\n\n\n      <div class=\"row\">\n        <div class=\"col-xs-12\">\n          <button class=\"btn btn-success\" type=\"submit\">Login</button>\n        </div>\n      </div>\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/loggin/loggin.component.ts":
+/***/ "../../../../../src/app/login/loggin.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -545,7 +583,7 @@ var LogginComponent = (function () {
     function LogginComponent(todoService, authService) {
         this.todoService = todoService;
         this.authService = authService;
-        this.user = new __WEBPACK_IMPORTED_MODULE_1__model_User__["a" /* User */]('admin', 'password');
+        this.user = new __WEBPACK_IMPORTED_MODULE_1__model_User__["a" /* User */]('test', 'password');
     }
     LogginComponent.prototype.ngOnInit = function () {
         // this.user= new User('admin', 'password');
@@ -567,8 +605,8 @@ var LogginComponent = (function () {
     LogginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'td-loggin',
-            template: __webpack_require__("../../../../../src/app/loggin/loggin.component.html"),
-            styles: [__webpack_require__("../../../../../src/app/loggin/loggin.component.css")]
+            template: __webpack_require__("../../../../../src/app/login/loggin.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/login/loggin.component.css")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__todo_service__["a" /* TodoService */], __WEBPACK_IMPORTED_MODULE_4__auth_auth_service__["a" /* AuthService */]])
     ], LogginComponent);
@@ -777,7 +815,7 @@ var SignupComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__delete_delete_component__ = __webpack_require__("../../../../../src/app/delete/delete.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__update_update_component__ = __webpack_require__("../../../../../src/app/update/update.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__retrieve_retrieve_component__ = __webpack_require__("../../../../../src/app/retrieve/retrieve.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__loggin_loggin_component__ = __webpack_require__("../../../../../src/app/loggin/loggin.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_loggin_component__ = __webpack_require__("../../../../../src/app/login/loggin.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__auth_AuthGuard__ = __webpack_require__("../../../../../src/app/auth/AuthGuard.ts");
 /**
  * Created by luizsilva on 7/9/17.
@@ -797,7 +835,7 @@ var TODO_ROUTES = [
     { path: 'delete', component: __WEBPACK_IMPORTED_MODULE_3__delete_delete_component__["a" /* DeleteComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_AuthGuard__["a" /* AuthGuard */]] },
     { path: 'update', component: __WEBPACK_IMPORTED_MODULE_4__update_update_component__["a" /* UpdateComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_AuthGuard__["a" /* AuthGuard */]] },
     { path: 'retrieve', component: __WEBPACK_IMPORTED_MODULE_5__retrieve_retrieve_component__["a" /* RetrieveComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_7__auth_AuthGuard__["a" /* AuthGuard */]] },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_6__loggin_loggin_component__["a" /* LogginComponent */] },
+    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_6__login_loggin_component__["a" /* LogginComponent */] },
 ];
 var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(TODO_ROUTES);
 

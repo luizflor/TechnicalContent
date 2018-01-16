@@ -11,10 +11,11 @@ import { DeleteComponent } from './delete/delete.component';
 import { RetrieveComponent } from './retrieve/retrieve.component';
 import {TodoService} from './todo.service';
 import { SignupComponent } from './signup/signup.component';
-import { LogginComponent } from './loggin/loggin.component';
+import { LogginComponent } from './login/loggin.component';
 import { TokenComponent } from './token/token.component';
 import {AuthService} from './auth/auth.service';
 import {AuthGuard} from './auth/AuthGuard';
+// import {StompConfig, StompService} from '@stomp/ng2-stompjs';
 
 @NgModule({
   declarations: [

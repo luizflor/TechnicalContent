@@ -7,7 +7,7 @@ import {AddComponent} from './add/add.component';
 import {DeleteComponent} from './delete/delete.component';
 import {UpdateComponent} from './update/update.component';
 import {RetrieveComponent} from './retrieve/retrieve.component';
-import {LogginComponent} from './loggin/loggin.component';
+import {LogginComponent} from './login/loggin.component';
 import {AuthGuard} from './auth/AuthGuard';
 
 const TODO_ROUTES: Routes = [

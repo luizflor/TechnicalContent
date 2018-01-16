@@ -10,16 +10,12 @@ export class AuthService {
 
   setToken(token: Token) {
 
-    //  const token = (jwtDecode(this.token.token));
-    // const userName = (jwtDecode(this.token.token).sub;
-    // const expirationSeconds = (new Date(token.exp * 1000).getTime() - new Date().getTime()) / 1000;
-    // console.log(expirationSeconds, userName);
-
     this._token = token.token;
     const tokenParse = jwtDecode(token.token);
     const userName = tokenParse['sub'];
+    const scope = tokenParse['scope'];
     const expirationSeconds = (new Date(tokenParse['exp'] * 1000).getTime() - new Date().getTime()) / 1000;
-    console.log(expirationSeconds, userName);
+    console.log('[AuthService]', expirationSeconds, userName, scope);
 
 
   }

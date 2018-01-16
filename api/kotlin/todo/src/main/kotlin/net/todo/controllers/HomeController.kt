@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 //@Controller
 //class HomeController {
-//    @RequestMapping(value = "/")
+//    @RequestMapping(value = "/**")
 //    fun index(): String {
 //        return "index"
 //    }

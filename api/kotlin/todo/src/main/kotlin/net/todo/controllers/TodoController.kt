@@ -58,7 +58,7 @@ class TodoController(private val template: SimpMessagingTemplate) {
             val tempTodo = todoRepository.createTodo(newTodo)
             val todo = tempTodo
             if(template.defaultDestination!=null) {
-                template.convertAndSend(todo)
+                template.convertAndSend("/stompresponse",todo)
             }
             return ResponseEntity(tempTodo, HttpStatus.CREATED)
         } catch (e: Exception) {
