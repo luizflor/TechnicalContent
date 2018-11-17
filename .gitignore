@@ -62,3 +62,8 @@ typings/
 *.class
 out/
 build/
+
+#.Net
+bin/
+obj/
+AdventureWorksSolution/packages/
