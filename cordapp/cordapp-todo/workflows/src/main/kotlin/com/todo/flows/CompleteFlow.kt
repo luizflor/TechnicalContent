@@ -3,10 +3,12 @@ package com.todo.flows
 import co.paralleluniverse.fibers.Suspendable
 import com.todo.contracts.TodoContract
 import com.todo.states.TodoState
+import com.todo.states.TodoStatus
 import net.corda.core.contracts.Command
 import net.corda.core.contracts.StateAndRef
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.*
+import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 import net.corda.core.node.services.Vault
 import net.corda.core.node.services.vault.QueryCriteria
@@ -56,7 +58,7 @@ object CompleteFlow {
 
             val completeCommand = getCommand(me)
 
-            val todoState = getTodo(taskId)
+            val todoState = getTodoStateAndRef(taskId)
 
             progressTracker.currentStep = BUILD_TRANSACTION
             val tx = getTx(notary, todoState, completeCommand)
@@ -77,12 +79,22 @@ object CompleteFlow {
             txBuilder.addCommand(command)
             txBuilder.addInputState(todoState)
 
+            val todo = todoState.state.data
+            if(todo.participants.size > todo.participantsCommpleted.size) {
+                val completedParticipants = todo.participantsCommpleted.filter { it.owningKey == this.ourIdentity.owningKey }.toMutableList()
+                if (completedParticipants.isEmpty()) {
+                    completedParticipants.add(this.ourIdentity)
+                }
+                val todoStateOutput = todo.copy(status = TodoStatus.Completed, participantsCommpleted = completedParticipants)
+                txBuilder.addOutputState(todoStateOutput)
+            }
+
             progressTracker.currentStep = VERIFY_TRANSACTION
             txBuilder.verify(serviceHub)
             return txBuilder
         }
 
-        private fun getTodo(linearId: UniqueIdentifier): StateAndRef<TodoState> {
+        private fun getTodoStateAndRef(linearId: UniqueIdentifier): StateAndRef<TodoState> {
             val criteria = QueryCriteria.LinearStateQueryCriteria(linearId = listOf(linearId)).and(QueryCriteria.VaultQueryCriteria(status = Vault.StateStatus.UNCONSUMED))
             val todoStateAndRef = serviceHub.vaultService.queryBy(TodoState::class.java,criteria).states.firstOrNull() ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
             return todoStateAndRef

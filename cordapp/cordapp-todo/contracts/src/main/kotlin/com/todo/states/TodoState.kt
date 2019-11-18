@@ -1,10 +1,8 @@
 package com.todo.states
 
 import com.todo.contracts.TodoContract
-import com.todo.schema.TodoSchema
 import com.todo.schema.TodoSchemaV1
 import net.corda.core.contracts.BelongsToContract
-import net.corda.core.contracts.ContractState
 import net.corda.core.contracts.LinearState
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.AbstractParty
@@ -18,7 +16,8 @@ import java.time.Instant
 @CordaSerializable
 enum class TodoStatus {
     New,
-    Canceled;
+    Canceled,
+    Completed;
 
     override fun toString(): String {
         return super.toString().toUpperCase()
@@ -31,18 +30,19 @@ enum class TodoStatus {
 @BelongsToContract(TodoContract::class)
 @CordaSerializable
 data class TodoState(
-        val me: Party,
+        val owner: Party,
         val task: String,
         val status: TodoStatus = TodoStatus.New,
         val entryDateTime: Instant = Instant.now(),
+        val participantsCommpleted: MutableList<AbstractParty> = mutableListOf<AbstractParty>(),
         override val linearId: UniqueIdentifier = UniqueIdentifier(),
-        override val participants: List<AbstractParty> = listOf(me)
+        override val participants: MutableList<AbstractParty> = mutableListOf<AbstractParty>(owner)
 ) : LinearState, QueryableState {
 
     override fun generateMappedObject(schema: MappedSchema): PersistentState {
         return when (schema) {
             is TodoSchemaV1 -> TodoSchemaV1.PersistentTodo(
-                    me = this.me.name.toString().take(255),
+                    me = this.owner.name.toString().take(255),
                     task = this.task.take(255),
                     linearId = this.linearId.id.toString(),
                     entryDateTime = this.entryDateTime,
@@ -55,5 +55,5 @@ data class TodoState(
 
     override fun supportedSchemas(): Iterable<MappedSchema>  = listOf(TodoSchemaV1)
 
-    override fun toString() = "${me.name.toString()} - task: $task status: $status linearId: $linearId entryDateTime: $entryDateTime"
+    override fun toString() = "${owner.name.toString()} - task: $task status: $status linearId: $linearId entryDateTime: $entryDateTime"
 }

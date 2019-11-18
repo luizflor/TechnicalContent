@@ -26,6 +26,8 @@ class TodoContract : Contract {
             is Commands.Create -> verifyCreate(tx, signers)
             is Commands.Cancel -> verifyCancel(tx, signers)
             is Commands.Complete -> verifyComplete(tx, signers)
+            is Commands.Invite -> verifyInvite(tx, signers)
+            is Commands.Uninvite -> verifyUninvite(tx, signers)
         }
     }
 
@@ -63,24 +65,66 @@ class TodoContract : Contract {
     private fun verifyComplete(tx: LedgerTransaction, signers: Set<PublicKey>) {
         requireThat {
             "Todo transaction should have input." using (tx.inputs.isNotEmpty())
-            "Todo transaction should have no output." using (tx.outputs.isEmpty())
-            val todo = tx.inputsOfType<TodoState>().single()
-            "Initial status must be new" using(todo.status == TodoStatus.New)
-            verifySignature(signers, todo)
+            val todoInput = tx.inputsOfType<TodoState>().single()
+        "Initial status must be new" using(todoInput.status == TodoStatus.New || todoInput.status == TodoStatus.Completed)
+
+            if(tx.outputs.isNotEmpty()) {
+                val todoOutput = tx.outputsOfType<TodoState>().single()
+                "Output status must be completed" using(todoOutput.status == TodoStatus.Completed)
+            } else {
+                var participants = todoInput.participants.map { it.owningKey }.toSet()
+                var participantsCompleted = todoInput.participantsCommpleted.map { it.owningKey }.toSet()
+
+                "All particants must complete the task" using (participantsCompleted == participants)
+                verifySignature(signers, todoInput)
+
+            }
         }
     }
 
-    private fun verifyCommon(tx: LedgerTransaction) {
+    private fun verifyInvite(tx: LedgerTransaction, signers: Set<PublicKey>) {
         requireThat {
             "Todo transaction should have input." using (tx.inputs.isNotEmpty())
-            "Todo transaction should have no output." using (tx.outputs.isEmpty())
+            "Todo transaction should have output." using (tx.outputs.isNotEmpty())
+            val todoInput = tx.inputsOfType<TodoState>().single()
+            val todoOutput = tx.outputsOfType<TodoState>().single()
+            "Initial status must be new" using(todoInput.status == TodoStatus.New)
+            "Owner of the task must be the same" using(todoInput.owner.owningKey == todoOutput.owner.owningKey)
+
+            "Owner must be present in the input" using (todoInput.participants.filter { it == todoInput.owner }.isNotEmpty())
+            "Owner must be present in the output" using (todoOutput.participants.filter { it == todoOutput.owner }.isNotEmpty())
+            "Invitation must have more than one participant" using (todoOutput.participants.size > 1)
+
+
+            verifySignature(signers, todoOutput)
         }
     }
+
+    private fun verifyUninvite(tx: LedgerTransaction, signers: Set<PublicKey>) {
+        requireThat {
+            "Todo transaction should have input." using (tx.inputs.isNotEmpty())
+            "Todo transaction should have output." using (tx.outputs.isNotEmpty())
+            val todoInput = tx.inputsOfType<TodoState>().single()
+            val todoOutput = tx.outputsOfType<TodoState>().single()
+            "Owner of the task must be the same" using(todoInput.owner == todoOutput.owner)
+
+            "Owner must be present in the input" using (todoInput.participants.filter { it == todoInput.owner }.isNotEmpty())
+            "Owner must be present in the output" using (todoOutput.participants.filter { it == todoOutput.owner }.isNotEmpty())
+
+            "Number of participants should have reduced" using (todoOutput.participants.size < todoInput.participants.size)
+
+            verifySignature(signers, todoOutput)
+        }
+    }
+
+
 
     // Used to indicate the transaction's intent.
     interface Commands : CommandData {
         class Create: TypeOnlyCommandData(), Commands
         class Cancel: TypeOnlyCommandData(), Commands
         class Complete: TypeOnlyCommandData(), Commands
+        class Invite: TypeOnlyCommandData(), Commands
+        class Uninvite: TypeOnlyCommandData(), Commands
     }
 }

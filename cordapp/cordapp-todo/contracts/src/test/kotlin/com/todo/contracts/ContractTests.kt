@@ -1,10 +1,8 @@
 package com.todo.contracts
 
 import com.todo.states.TodoStatus
-import net.corda.testing.node.MockServices
 import net.corda.testing.node.ledger
 import org.junit.Test
-import kotlin.test.todo
 
 class ContractTests: TodoContractTestBase() {
 
@@ -13,7 +11,7 @@ class ContractTests: TodoContractTestBase() {
         ledgerServices.ledger {
             transaction {
                 output(TodoContract.TODO_CONTRACT_ID, todo_State)
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Create())
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Create())
                 verifies()
             }
         }
@@ -24,7 +22,7 @@ class ContractTests: TodoContractTestBase() {
             transaction {
                 input(TodoContract.TODO_CONTRACT_ID, todo_State )
                 output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(status = TodoStatus.Canceled) )
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Cancel())
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Cancel())
                 verifies()
             }
         }
@@ -33,8 +31,19 @@ class ContractTests: TodoContractTestBase() {
     fun `Complete - ok`() {
         ledgerServices.ledger {
             transaction {
-                input(TodoContract.TODO_CONTRACT_ID, todo_State )
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Complete())
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCommpleted = mutableListOf(PartyA)) )
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Complete())
+                verifies()
+            }
+        }
+    }
+    @Test
+    fun `Complete with more than 1 participant - ok`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants= mutableListOf(PartyA, PartyB)))
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCommpleted= mutableListOf(PartyA), status = TodoStatus.Completed))
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Complete())
                 verifies()
             }
         }
@@ -46,7 +55,7 @@ class ContractTests: TodoContractTestBase() {
             transaction {
                 input(TodoContract.TODO_CONTRACT_ID, todo_State)
                 output(TodoContract.TODO_CONTRACT_ID, todo_State)
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Create())
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Create())
                 failsWith(" Todo transaction should have no input.")
             }
         }
@@ -57,20 +66,68 @@ class ContractTests: TodoContractTestBase() {
         ledgerServices.ledger {
             transaction {
                 input(TodoContract.TODO_CONTRACT_ID, todo_State)
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Cancel())
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Cancel())
                 failsWith("Todo transaction should have  output.")
             }
         }
     }
 
     @Test
-    fun `Completed - should not have an output`() {
+    fun `Completed - Output status must be completed`() {
         ledgerServices.ledger {
             transaction {
                 input(TodoContract.TODO_CONTRACT_ID, todo_State)
                 output(TodoContract.TODO_CONTRACT_ID, todo_State)
-                command(signer = me.owningKey, commandData = TodoContract.Commands.Complete())
-                failsWith("Todo transaction should have no output.")
+                command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Complete())
+                failsWith("Output status must be completed")
+            }
+        }
+    }
+
+
+    @Test
+    fun `Invite - ok`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(status = TodoStatus.New) )
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA, PartyB)) )
+                command(listOf(PartyA.owningKey, PartyB.owningKey), commandData = TodoContract.Commands.Invite())
+                verifies()
+            }
+        }
+    }
+
+    @Test
+    fun `Uninvite - ok`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA, PartyB)))
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA)))
+                command(listOf(PartyA.owningKey), commandData = TodoContract.Commands.Uninvite())
+                verifies()
+            }
+        }
+    }
+
+    @Test
+    fun `Uninvite - Owner must be present in the output`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA, PartyB)) )
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyB)) )
+                command(listOf(PartyB.owningKey), commandData = TodoContract.Commands.Uninvite())
+                failsWith("Owner must be present in the output,")
+            }
+        }
+    }
+    @Test
+    fun `Uninvite - Signing is required`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA, PartyB)) )
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA)) )
+                command(listOf(PartyB.owningKey), commandData = TodoContract.Commands.Uninvite())
+                failsWith("Signing is required")
             }
         }
     }

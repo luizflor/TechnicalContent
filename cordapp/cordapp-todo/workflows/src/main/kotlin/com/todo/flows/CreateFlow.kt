@@ -78,7 +78,7 @@ object CreateFlow {
             return txBuilder
         }
 
-        private fun getTodo(me: Party) = TodoState(me = me, task = task)
+        private fun getTodo(me: Party) = TodoState(owner = me, task = task)
 
         private fun getCommand(me: Party) =
                 Command(TodoContract.Commands.Create(), listOf(me.owningKey))

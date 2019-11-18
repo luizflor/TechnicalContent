@@ -1,5 +1,6 @@
 package com.todo
 
+import com.todo.flows.AddParticipantsFlow
 import com.todo.flows.CancelFlow
 import com.todo.flows.CompleteFlow
 import com.todo.flows.CreateFlow
@@ -7,6 +8,7 @@ import com.todo.flows.CreateFlow
 import net.corda.core.concurrent.CordaFuture
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.identity.CordaX500Name
+import net.corda.core.identity.Party
 import net.corda.core.transactions.SignedTransaction
 import net.corda.testing.common.internal.testNetworkParameters
 import net.corda.testing.node.MockNetwork
@@ -37,8 +39,8 @@ abstract class FlowTests {
         TestCordapp.findCordapp("com.todo.flows")
     ),    notarySpecs = listOf(MockNetworkNotarySpec(name = notaryName, validating = false)),
             networkParameters = testNetworkParameters(minimumPlatformVersion = 4),threadPerNode = true))
-    private val a = network.createNode()
-    private val b = network.createNode()
+    protected val a = network.createNode()
+    protected val b = network.createNode()
 
     init {
 //        listOf(a, b).forEach {
@@ -69,6 +71,13 @@ abstract class FlowTests {
     protected fun cancelTask(taskId: UniqueIdentifier, isCancel: Boolean = true): CordaFuture<SignedTransaction> {
         val info = CancelFlow.Info(taskId = taskId, isCancel = isCancel)
         val sender = CancelFlow.CancelSender(info)
+
+        return a.startFlow(sender)
+    }
+
+    protected fun addParticipantTask(taskId: UniqueIdentifier, participant: Party): CordaFuture<SignedTransaction> {
+        val info = AddParticipantsFlow.Info(taskId = taskId, participant = participant)
+        val sender = AddParticipantsFlow.AddParticipantsSender(info)
 
         return a.startFlow(sender)
     }
