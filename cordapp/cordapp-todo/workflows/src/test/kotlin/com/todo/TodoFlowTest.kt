@@ -80,5 +80,37 @@ class TodoFlowTest : FlowTests() {
 
         val todoStateCompleted = addParticipantResult.tx.outputsOfType<TodoState>().single()
         assertEquals(2,todoStateCompleted.participants.size)
+
+        val addParticipant2 = addParticipantTask(todoState.linearId, c.info.singleIdentity())
+        val addParticipantResult2 = addParticipant2.getOrThrow()
+        network.waitQuiescent()
+
+        val todoStateCompleted2 = addParticipantResult2.tx.outputsOfType<TodoState>().single()
+        assertEquals(3,todoStateCompleted2.participants.size)
+    }
+
+    @Test
+    fun `Add Unnvitation - ok`() {
+        val sender = createTask("buy milk")
+        val senderResult =  sender.getOrThrow()
+        network.waitQuiescent()
+        val todoState = senderResult.tx.outputsOfType<TodoState>().single()
+        logger.info(todoState.toString())
+
+        val addParticipant = addParticipantTask(todoState.linearId, b.info.singleIdentity())
+        val addParticipantResult = addParticipant.getOrThrow()
+        network.waitQuiescent()
+
+        val todoStateCompleted = addParticipantResult.tx.outputsOfType<TodoState>().single()
+        assertEquals(2,todoStateCompleted.participants.size)
+
+        val removeParticipant = removeParticipantTask(todoState.linearId)
+        val removeParticipantResult = removeParticipant.getOrThrow()
+        network.waitQuiescent()
+
+        val todoStateCompleted2 = removeParticipantResult.tx.outputsOfType<TodoState>().single()
+        assertEquals(1,todoStateCompleted2.participants.size)
+
+
     }
 }

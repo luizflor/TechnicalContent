@@ -46,45 +46,31 @@ object CreateFlow {
 
         @Suspendable
         override fun call(): SignedTransaction {
-            // Initiator flow logic goes here.
-            val notary = getNotary()
+            val transaction: TransactionBuilder = transaction()
+            val signedTransaction: SignedTransaction = verifyAndSign(transaction)
+            val sessions = listOf<FlowSession>()
+            return finality(signedTransaction, sessions)
+        }
 
-            val me = getMe()
 
-            val createCommand = getCommand(me)
+        @Suspendable
+        private fun finality(stx: SignedTransaction, counterpartySession: List<FlowSession>) =
+                subFlow(FinalityFlow(transaction = stx, sessions = counterpartySession, progressTracker = FINALISING.childProgressTracker()))
 
-            val todoState = getTodo(me)
-
+        private fun transaction() : TransactionBuilder {
             progressTracker.currentStep = BUILD_TRANSACTION
-            val tx = getTx(notary, todoState, createCommand)
-
-            progressTracker.currentStep = SIGN_TRANSACTION
-            val ptx = signTransaction(tx, me)
-
-            return subFlow(FinalityFlow(transaction = ptx, sessions = listOf(), progressTracker = FINALISING.childProgressTracker()))
-        }
-
-        private fun signTransaction(tx: TransactionBuilder, me: Party): SignedTransaction {
-            val myKeysToSign = listOf(me.owningKey)
-            return serviceHub.signInitialTransaction(tx, myKeysToSign)
-        }
-
-        private fun getTx(notary: Party, todoState: TodoState, createCommand: Command<TodoContract.Commands.Create>): TransactionBuilder {
+            val notary = serviceHub.networkMapCache.notaryIdentities.single()
             val txBuilder = TransactionBuilder(notary)
-            txBuilder.withItems(StateAndContract(todoState, TodoContract.TODO_CONTRACT_ID), createCommand)
-
-            progressTracker.currentStep = VERIFY_TRANSACTION
-            txBuilder.verify(serviceHub)
+            val command = Command(TodoContract.Commands.Create(), listOf(this.ourIdentity.owningKey))
+            val state = TodoState(owner = this.ourIdentity, task =this.task)
+            txBuilder.withItems(StateAndContract(state,TodoContract.TODO_CONTRACT_ID), command)
             return txBuilder
         }
 
-        private fun getTodo(me: Party) = TodoState(owner = me, task = task)
-
-        private fun getCommand(me: Party) =
-                Command(TodoContract.Commands.Create(), listOf(me.owningKey))
-
-        private fun getMe() = this.ourIdentity
-
-        private fun getNotary() = serviceHub.networkMapCache.notaryIdentities.single()
+        private fun verifyAndSign(transaction: TransactionBuilder): SignedTransaction {
+            progressTracker.currentStep = SIGN_TRANSACTION
+            transaction.verify(serviceHub)
+            return serviceHub.signInitialTransaction(transaction)
+        }
     }
 }

@@ -194,7 +194,27 @@ VAULTQUERY
     stateTypes: "UNCONSUMED"
     otherResults: []
 
-flow start com.todo.flows.CancelFlow$CancelSender taskId: c6f1d1e0-0881-4fa0-ac8a-632f39d67c5a, isCancel: true
+ AddParticipantsFlow   
+    flow start com.todo.flows.AddParticipantsFlow$AddParticipantsSender taskId: 5e7710aa-06c2-475f-a551-427326ccaff8, participant: "O=PartyB,L=New York,C=US"
+     ✅   Starting
+     ✅   Build the transaction
+     ✅   Verify the transaction
+     ✅   Sign the transaction
+         ✅   Requesting signature by notary service
+             ✅   Requesting signature by Notary service
+             ✅   Validating response from Notary service
+         ✅   Broadcasting transaction to participants
+          Finalising transaction
+              Requesting signature by notary service
+                  Requesting signature by Notary service
+                  Validating response from Notary service
+              Broadcasting transaction to participants
+          Collecting counterparty signature
+              Collecting signatures from counterparties.
+              Verifying collected signatures.
+    ➡️   Done
+Flow completed with result: SignedTransaction(id=F1C4491444DB53EF49900D6376EE8BCC6C146EDCB9E9447A3DEF7801E8787ABE)
+
 
     
 vaultQueryByCriteria ???
@@ -202,6 +222,48 @@ vaultQueryByCriteria ???
     run vaultQueryByCriteria contractStateType: com.todo.states.TodoState, criteria: { status: Vault.StateStatus.CONSUMED }
 
 You can find out more about the node shell [here](https://docs.corda.net/shell.html).
+
+flow start com.todo.flows.AddParticipantsFlow$AddParticipantsSender taskId: 5e7710aa-06c2-475f-a551-427326ccaff8, participant: "O=PartyB,L=New York,C=US"
+
+     ✅   Starting
+     ✅   Build the transaction
+     ✅   Verify the transaction
+     ✅   Sign the transaction
+         ✅   Requesting signature by notary service
+             ✅   Requesting signature by Notary service
+             ✅   Validating response from Notary service
+         ✅   Broadcasting transaction to participants
+          Finalising transaction
+              Requesting signature by notary service
+                  Requesting signature by Notary service
+                  Validating response from Notary service
+              Broadcasting transaction to participants
+          Collecting counterparty signature
+              Collecting signatures from counterparties.
+              Verifying collected signatures.
+    ➡️   Done
+    Flow completed with result: SignedTransaction(id=2E546841E9D0B369E9CBB95E8DC61E0F69492357DF32FEFEA38C5AE54D955A56)
+
+flow start com.todo.flows.RemoveParticipantsFlow$RemoveParticipantsSender taskId: 5d71daa3-19d8-4f0c-8b93-44ad247df1df
+
+ ✅   Starting
+ ✅   Build the transaction
+ ✅   Verify the transaction
+ ✅   Sign the transaction
+     ✅   Requesting signature by notary service
+         ✅   Requesting signature by Notary service
+         ✅   Validating response from Notary service
+     ✅   Broadcasting transaction to participants
+      Finalising transaction
+          Requesting signature by notary service
+              Requesting signature by Notary service
+              Validating response from Notary service
+          Broadcasting transaction to participants
+      Collecting counterparty signature
+          Collecting signatures from counterparties.
+          Verifying collected signatures.
+➡️   Done
+Flow completed with result: SignedTransaction(id=905B4F0D7D17AB7DCF812166CB7E7CAA706ABEE5D5AA39A6A9EFB3805E681D90)
 
 ### Client
 

@@ -98,6 +98,18 @@ class ContractTests: TodoContractTestBase() {
     }
 
     @Test
+    fun `Invite a 3rd - ok`() {
+        ledgerServices.ledger {
+            transaction {
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(status = TodoStatus.New, participants = mutableListOf(PartyA, PartyB)) )
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants = mutableListOf(PartyA, PartyB, PartyC)) )
+                command(listOf(PartyA.owningKey, PartyB.owningKey, PartyC.owningKey), commandData = TodoContract.Commands.Invite())
+                verifies()
+            }
+        }
+    }
+
+    @Test
     fun `Uninvite - ok`() {
         ledgerServices.ledger {
             transaction {

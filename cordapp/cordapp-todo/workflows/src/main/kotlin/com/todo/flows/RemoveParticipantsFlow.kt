@@ -3,12 +3,10 @@ package com.todo.flows
 import co.paralleluniverse.fibers.Suspendable
 import com.todo.contracts.TodoContract
 import com.todo.states.TodoState
-import com.todo.states.TodoStatus
 import net.corda.core.contracts.Command
 import net.corda.core.contracts.StateAndRef
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.*
-import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 import net.corda.core.node.StatesToRecord
 import net.corda.core.node.services.Vault
@@ -20,18 +18,18 @@ import net.corda.core.utilities.ProgressTracker
 import java.lang.IllegalArgumentException
 
 /**
- * This flow evolves the todo task from with new participants
+ * A node member who is participant and not an owner of the task decides to leave
  * Notary will create a transaction record containing reference to the previous transaction.
  */
-object AddParticipantsFlow {
+object RemoveParticipantsFlow {
     @CordaSerializable
-    data class Info(val taskId: UniqueIdentifier, val participant: Party)
+    data class Info(val taskId: UniqueIdentifier)
 
     @InitiatingFlow
     @StartableByRPC
-    class AddParticipantsSender(val taskId: UniqueIdentifier, val participant: Party) : FlowLogic<SignedTransaction>() {
+    class RemoveParticipantsSender(val taskId: UniqueIdentifier) : FlowLogic<SignedTransaction>() {
 
-        constructor(info: Info) : this(taskId = info.taskId, participant = info.participant)
+        constructor(info: Info) : this(taskId = info.taskId)
 
         companion object {
             object BUILD_TRANSACTION : ProgressTracker.Step("Build the transaction")
@@ -64,22 +62,17 @@ object AddParticipantsFlow {
 
             val todoState = getTodo(taskId)
 
-            val participants = todoState.state.data.participants.filter { it.owningKey == participant.owningKey }.toMutableList()
-            if (participants.isEmpty()) {
-                participants.addAll(todoState.state.data.participants)
-                participants.add(participant)
-            }
+            val uNinviteCommand = getCommand(todoState.state.data, me)
 
             progressTracker.currentStep = BUILD_TRANSACTION
-            val tx = getTx(notary, todoState, participants)
+            val tx = getTx(notary, todoState, uNinviteCommand, me)
 
             progressTracker.currentStep = SIGN_TRANSACTION
             val ptx = signTransaction(tx, me)
 
             // Initialising session with other party
-            //(((tx.outputs as java.util.ArrayList<*>)[0] as TransactionState).data as TodoState).participants
             val flows = ArrayList<FlowSession>()
-            participants
+            todoState.state.data.participants
                     .filter {!(it == me || it == notary)}
                     .forEach { flows.add(initiateFlow(it as Party)) }
 
@@ -106,21 +99,16 @@ object AddParticipantsFlow {
             return serviceHub.signInitialTransaction(tx, myKeysToSign)
         }
 
-        private fun getTx(notary: Party, todoStateStateRef: StateAndRef<TodoState>, participants: MutableList<AbstractParty>): TransactionBuilder {
+        private fun getTx(notary: Party, todoStateStateRef: StateAndRef<TodoState>, command: Command<TodoContract.Commands.Uninvite>, participant: Party): TransactionBuilder {
             val txBuilder = TransactionBuilder(notary)
+            txBuilder.addCommand(command)
             txBuilder.addInputState(todoStateStateRef)
             val todoState = todoStateStateRef.state.data
 
-//            val participants = todoState.participants.filter { it.owningKey == participant.owningKey }.toMutableList()
-//            if (participants.isEmpty()) {
-//                participants.addAll(todoState.participants)
-//                participants.add(participant)
-//            }
+            val participants = todoState.participants.filter { it.owningKey != participant.owningKey }.toMutableList()
+
             val todoStateOutput = todoState.copy(participants = participants)
             txBuilder.addOutputState(todoStateOutput)
-
-            val command = getCommand(todoStateOutput)
-            txBuilder.addCommand(command)
 
             progressTracker.currentStep = VERIFY_TRANSACTION
             txBuilder.verify(serviceHub)
@@ -134,11 +122,8 @@ object AddParticipantsFlow {
             return todoStateAndRef
         }
 
-//        private fun getCommand(me: Party, participant: Party) =
-//                Command(TodoContract.Commands.Invite(), listOf(me.owningKey, participant.owningKey))
-
-        private fun getCommand(todoState: TodoState) =
-                Command(TodoContract.Commands.Invite(), todoState.participants.map { it.owningKey })
+        private fun getCommand(todoState: TodoState, me: Party) =
+                Command(TodoContract.Commands.Uninvite(), todoState.participants.filter{it.owningKey != me.owningKey}.map { it.owningKey })
 
         private fun getMe() = this.ourIdentity
 
@@ -146,7 +131,7 @@ object AddParticipantsFlow {
     }
 
 
-    @InitiatedBy(AddParticipantsSender::class)
+    @InitiatedBy(RemoveParticipantsSender::class)
     class AddParticipantsResponder(val counterpartySession: FlowSession) : FlowLogic<Unit>() {
         @Suspendable
         override fun call() {

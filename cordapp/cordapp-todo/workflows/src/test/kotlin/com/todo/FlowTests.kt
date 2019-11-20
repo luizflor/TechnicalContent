@@ -1,9 +1,6 @@
 package com.todo
 
-import com.todo.flows.AddParticipantsFlow
-import com.todo.flows.CancelFlow
-import com.todo.flows.CompleteFlow
-import com.todo.flows.CreateFlow
+import com.todo.flows.*
 //import com.todo.flows.Responder
 import net.corda.core.concurrent.CordaFuture
 import net.corda.core.contracts.UniqueIdentifier
@@ -41,6 +38,7 @@ abstract class FlowTests {
             networkParameters = testNetworkParameters(minimumPlatformVersion = 4),threadPerNode = true))
     protected val a = network.createNode()
     protected val b = network.createNode()
+    protected val c = network.createNode()
 
     init {
 //        listOf(a, b).forEach {
@@ -80,5 +78,11 @@ abstract class FlowTests {
         val sender = AddParticipantsFlow.AddParticipantsSender(info)
 
         return a.startFlow(sender)
+    }
+    protected fun removeParticipantTask(taskId: UniqueIdentifier): CordaFuture<SignedTransaction> {
+        val info = RemoveParticipantsFlow.Info(taskId = taskId)
+        val sender = RemoveParticipantsFlow.RemoveParticipantsSender(info)
+
+        return b.startFlow(sender)
     }
 }
