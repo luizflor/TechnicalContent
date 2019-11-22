@@ -26,7 +26,7 @@ object CancelFlow {
 
     @InitiatingFlow
     @StartableByRPC
-    class CancelSender(val taskId: UniqueIdentifier, val isCancel: Boolean= true) : FlowLogic<SignedTransaction>() {
+    class CancelSender(private val taskId: UniqueIdentifier, val isCancel: Boolean= true) : FlowLogic<SignedTransaction>() {
 
         constructor(info: Info): this(taskId=info.taskId,
                 isCancel = info.isCancel)
@@ -82,8 +82,7 @@ object CancelFlow {
 
         private fun getTodoStateAndRef(linearId: UniqueIdentifier): StateAndRef<TodoState> {
             val criteria = QueryCriteria.LinearStateQueryCriteria(linearId = listOf(linearId)).and(QueryCriteria.VaultQueryCriteria(status = Vault.StateStatus.UNCONSUMED))
-            val todoStateAndRef = serviceHub.vaultService.queryBy(TodoState::class.java,criteria).states.firstOrNull() ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
-            return todoStateAndRef
+            return serviceHub.vaultService.queryBy(TodoState::class.java,criteria).states.firstOrNull() ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
         }
     }
 }

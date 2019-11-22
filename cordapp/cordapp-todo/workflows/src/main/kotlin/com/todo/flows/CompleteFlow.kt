@@ -9,7 +9,6 @@ import net.corda.core.contracts.StateAndRef
 import net.corda.core.contracts.UniqueIdentifier
 import net.corda.core.flows.*
 import net.corda.core.identity.AbstractParty
-import net.corda.core.identity.Party
 import net.corda.core.node.services.Vault
 import net.corda.core.node.services.vault.QueryCriteria
 import net.corda.core.serialization.CordaSerializable
@@ -19,7 +18,8 @@ import net.corda.core.utilities.ProgressTracker
 import java.lang.IllegalArgumentException
 
 /**
- * This flow complete todo task by consuming its state. Only one party is involved.
+ * This flow complete todo task by consuming its state if there is one member involved
+ * If more members are involved it mark the task complete and only consumes it after all members acknowledge completion
  */
 object CompleteFlow {
     @CordaSerializable
@@ -27,7 +27,7 @@ object CompleteFlow {
 
     @InitiatingFlow
     @StartableByRPC
-    class CompleteSender(val taskId: UniqueIdentifier) : FlowLogic<SignedTransaction>() {
+    class CompleteSender(private val taskId: UniqueIdentifier) : FlowLogic<SignedTransaction>() {
 
         constructor(info: Info): this(taskId=info.taskId)
 
@@ -65,16 +65,11 @@ object CompleteFlow {
             txBuilder.addCommand(command)
             val state = getTodoStateAndRef(this.taskId)
 
-
             txBuilder.addInputState(state)
 
             val todo = state.state.data
             if(todo.participants.size > todo.participantsCommpleted.size) {
-                val completedParticipants = todo.participantsCommpleted.filter { it.owningKey == this.ourIdentity.owningKey }.toMutableList()
-                if (completedParticipants.isEmpty()) {
-                    completedParticipants.add(this.ourIdentity)
-                }
-                val todoStateOutput = todo.copy(status = TodoStatus.Completed, participantsCommpleted = completedParticipants)
+                val todoStateOutput = todo.copy(status = TodoStatus.Completed, participantsCommpleted = (todo.participantsCommpleted + this.ourIdentity) as MutableList<AbstractParty>)
                 txBuilder.addOutputState(todoStateOutput)
             }
 
@@ -93,8 +88,7 @@ object CompleteFlow {
 
         private fun getTodoStateAndRef(linearId: UniqueIdentifier): StateAndRef<TodoState> {
             val criteria = QueryCriteria.LinearStateQueryCriteria(linearId = listOf(linearId)).and(QueryCriteria.VaultQueryCriteria(status = Vault.StateStatus.UNCONSUMED))
-            val todoStateAndRef = serviceHub.vaultService.queryBy(TodoState::class.java,criteria).states.firstOrNull() ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
-            return todoStateAndRef
+            return serviceHub.vaultService.queryBy(TodoState::class.java,criteria).states.firstOrNull() ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
         }
     }
 }

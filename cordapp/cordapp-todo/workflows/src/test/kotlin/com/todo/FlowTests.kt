@@ -40,14 +40,8 @@ abstract class FlowTests {
     protected val b = network.createNode()
     protected val c = network.createNode()
 
-    init {
-//        listOf(a, b).forEach {
-//            it.registerInitiatedFlow(Responder::class.java)
-//        }
-    }
-
     @Before
-    fun setup(){ }//= network.runNetwork()
+    fun setup(){ }
 
     @After
     fun tearDown() = network.stopNodes()

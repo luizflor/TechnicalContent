@@ -90,7 +90,7 @@ class TodoFlowTest : FlowTests() {
     }
 
     @Test
-    fun `Add Unnvitation - ok`() {
+    fun `Remove Invitation - ok`() {
         val sender = createTask("buy milk")
         val senderResult =  sender.getOrThrow()
         network.waitQuiescent()

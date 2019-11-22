@@ -22,7 +22,7 @@ object CreateFlow {
 
     @InitiatingFlow
     @StartableByRPC
-    class CreateSender(val task: String) : FlowLogic<SignedTransaction>() {
+    class CreateSender(private val task: String) : FlowLogic<SignedTransaction>() {
 
         constructor(info: Info): this(task=info.task)
 

@@ -3,7 +3,6 @@ package com.todo.flows
 import co.paralleluniverse.fibers.Suspendable
 import com.todo.contracts.TodoContract
 import com.todo.states.TodoState
-import com.todo.states.TodoStatus
 import net.corda.core.contracts.Command
 import net.corda.core.contracts.StateAndRef
 import net.corda.core.contracts.UniqueIdentifier
@@ -29,7 +28,7 @@ object AddParticipantsFlow {
 
     @InitiatingFlow
     @StartableByRPC
-    class AddParticipantsSender(val taskId: UniqueIdentifier, val participant: Party) : FlowLogic<SignedTransaction>() {
+    class AddParticipantsSender(private val taskId: UniqueIdentifier, private val participant: Party) : FlowLogic<SignedTransaction>() {
 
         constructor(info: Info) : this(taskId = info.taskId, participant = info.participant)
 
@@ -57,35 +56,41 @@ object AddParticipantsFlow {
 
         @Suspendable
         override fun call(): SignedTransaction {
-            // Initiator flow logic goes here.
-            val notary = getNotary()
+            val transaction: TransactionBuilder = transaction()
+            val signedTransaction: SignedTransaction = verifyAndSign(transaction)
 
-            val me = getMe()
+            val participants = (transaction.outputStates().single().data as TodoState).participants - this.ourIdentity - getNotary()
+            val sessions = ArrayList<FlowSession>()
+            participants.forEach { sessions.add(initiateFlow(it as Party)) }
+            val stx = collectSignatures(signedTransaction, sessions)
 
-            val todoState = getTodo(taskId)
+            return finality(stx, sessions)
+        }
 
-            val participants = todoState.state.data.participants.filter { it.owningKey == participant.owningKey }.toMutableList()
-            if (participants.isEmpty()) {
-                participants.addAll(todoState.state.data.participants)
-                participants.add(participant)
-            }
-
+        private fun transaction() : TransactionBuilder {
             progressTracker.currentStep = BUILD_TRANSACTION
-            val tx = getTx(notary, todoState, participants)
+            val notary = serviceHub.networkMapCache.notaryIdentities.single()
+            val txBuilder = TransactionBuilder(notary)
 
+            val todoStateRef = getTodoStateAndRef(this.taskId)
+            txBuilder.addInputState(todoStateRef)
+
+            val todoState=  todoStateRef.state.data
+            val todoStateOutput = todoState.copy(participants = (todoState.participants + this.participant) as MutableList<AbstractParty>)
+            txBuilder.addOutputState(todoStateOutput)
+
+            val command = Command(TodoContract.Commands.Invite(), todoStateOutput.participants.map { it.owningKey })
+            txBuilder.addCommand(command)
+
+            progressTracker.currentStep = VERIFY_TRANSACTION
+            txBuilder.verify(serviceHub)
+            return txBuilder
+        }
+
+        private fun verifyAndSign(transaction: TransactionBuilder): SignedTransaction {
             progressTracker.currentStep = SIGN_TRANSACTION
-            val ptx = signTransaction(tx, me)
-
-            // Initialising session with other party
-            //(((tx.outputs as java.util.ArrayList<*>)[0] as TransactionState).data as TodoState).participants
-            val flows = ArrayList<FlowSession>()
-            participants
-                    .filter {!(it == me || it == notary)}
-                    .forEach { flows.add(initiateFlow(it as Party)) }
-
-            val stx = collectSignatures(ptx, flows)
-
-            return finality(stx, flows)
+            transaction.verify(serviceHub)
+            return serviceHub.signInitialTransaction(transaction)
         }
 
         @Suspendable
@@ -101,46 +106,11 @@ object AddParticipantsFlow {
             ))
         }
 
-        private fun signTransaction(tx: TransactionBuilder, me: Party): SignedTransaction {
-            val myKeysToSign = listOf(me.owningKey)
-            return serviceHub.signInitialTransaction(tx, myKeysToSign)
-        }
-
-        private fun getTx(notary: Party, todoStateStateRef: StateAndRef<TodoState>, participants: MutableList<AbstractParty>): TransactionBuilder {
-            val txBuilder = TransactionBuilder(notary)
-            txBuilder.addInputState(todoStateStateRef)
-            val todoState = todoStateStateRef.state.data
-
-//            val participants = todoState.participants.filter { it.owningKey == participant.owningKey }.toMutableList()
-//            if (participants.isEmpty()) {
-//                participants.addAll(todoState.participants)
-//                participants.add(participant)
-//            }
-            val todoStateOutput = todoState.copy(participants = participants)
-            txBuilder.addOutputState(todoStateOutput)
-
-            val command = getCommand(todoStateOutput)
-            txBuilder.addCommand(command)
-
-            progressTracker.currentStep = VERIFY_TRANSACTION
-            txBuilder.verify(serviceHub)
-            return txBuilder
-        }
-
-        private fun getTodo(linearId: UniqueIdentifier): StateAndRef<TodoState> {
+        private fun getTodoStateAndRef(linearId: UniqueIdentifier): StateAndRef<TodoState> {
             val criteria = QueryCriteria.LinearStateQueryCriteria(linearId = listOf(linearId)).and(QueryCriteria.VaultQueryCriteria(status = Vault.StateStatus.UNCONSUMED))
-            val todoStateAndRef = serviceHub.vaultService.queryBy(TodoState::class.java, criteria).states.firstOrNull()
+            return serviceHub.vaultService.queryBy(TodoState::class.java, criteria).states.firstOrNull()
                     ?: throw IllegalArgumentException("TodoState with linearId $linearId not found. ")
-            return todoStateAndRef
         }
-
-//        private fun getCommand(me: Party, participant: Party) =
-//                Command(TodoContract.Commands.Invite(), listOf(me.owningKey, participant.owningKey))
-
-        private fun getCommand(todoState: TodoState) =
-                Command(TodoContract.Commands.Invite(), todoState.participants.map { it.owningKey })
-
-        private fun getMe() = this.ourIdentity
 
         private fun getNotary() = serviceHub.networkMapCache.notaryIdentities.single()
     }
