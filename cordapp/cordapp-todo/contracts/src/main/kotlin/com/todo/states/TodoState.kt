@@ -34,7 +34,7 @@ data class TodoState(
         val task: String,
         val status: TodoStatus = TodoStatus.New,
         val entryDateTime: Instant = Instant.now(),
-        val participantsCommpleted: MutableList<AbstractParty> = mutableListOf<AbstractParty>(),
+        val participantsCompleted: MutableList<AbstractParty> = mutableListOf<AbstractParty>(),
         override val linearId: UniqueIdentifier = UniqueIdentifier(),
         override val participants: MutableList<AbstractParty> = mutableListOf<AbstractParty>(owner)
 ) : LinearState, QueryableState {

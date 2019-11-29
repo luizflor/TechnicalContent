@@ -73,7 +73,7 @@ class TodoContract : Contract {
                 "Output status must be completed" using(todoOutput.status == TodoStatus.Completed)
             } else {
                 var participants = todoInput.participants.map { it.owningKey }.toSet()
-                var participantsCompleted = todoInput.participantsCommpleted.map { it.owningKey }.toSet()
+                var participantsCompleted = todoInput.participantsCompleted.map { it.owningKey }.toSet()
 
                 "All particants must complete the task" using (participantsCompleted == participants)
                 verifySignature(signers, todoInput)

@@ -31,7 +31,7 @@ class ContractTests: TodoContractTestBase() {
     fun `Complete - ok`() {
         ledgerServices.ledger {
             transaction {
-                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCommpleted = mutableListOf(PartyA)) )
+                input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCompleted = mutableListOf(PartyA)) )
                 command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Complete())
                 verifies()
             }
@@ -42,7 +42,7 @@ class ContractTests: TodoContractTestBase() {
         ledgerServices.ledger {
             transaction {
                 input(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participants= mutableListOf(PartyA, PartyB)))
-                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCommpleted= mutableListOf(PartyA), status = TodoStatus.Completed))
+                output(TodoContract.TODO_CONTRACT_ID, todo_State.copy(participantsCompleted= mutableListOf(PartyA), status = TodoStatus.Completed))
                 command(signer = PartyA.owningKey, commandData = TodoContract.Commands.Complete())
                 verifies()
             }
