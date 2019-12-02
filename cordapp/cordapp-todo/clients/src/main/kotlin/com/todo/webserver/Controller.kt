@@ -61,11 +61,17 @@ class Controller(val rpc: NodeRPCConnection) {
     private fun CompleteTask(@RequestParam("taskId" )taskId: String): ResponseEntity<Any> {
         logger.info("/CompleteTask?taskId=$taskId")
         val info = CompleteFlow.Info(taskId = UniqueIdentifier.fromString(taskId))
-        val flow = rpc.proxy.startFlowDynamic(CompleteFlow.CompleteSender::class.java,info)
+        val flow = rpc.proxy.startFlowDynamic(CompleteFlow.CompleteSender::class.java, info)
         val result = flow.returnValue.getOrThrow()
-        val todoState = result.tx.outputsOfType<TodoState>().single()
-        val input = result.tx.inputs.single()
-        val todo = com.todo.webserver.model.TodoState(index=0,todo = todoState, metadata = null,transactionId = result.id.toString(), ref = input)
+        val todoStateList = result.tx.outputsOfType<TodoState>()
+        val todo: com.todo.webserver.model.TodoState
+        if (todoStateList.isEmpty()) {
+            todo = com.todo.webserver.model.TodoState()
+        } else {
+            val todoState = todoStateList.single()
+            val input = result.tx.inputs.single()
+            todo = com.todo.webserver.model.TodoState(index = 0, todo = todoState, metadata = null, transactionId = result.id.toString(), ref = input)
+        }
         return ResponseEntity.ok().body(todo)
     }
 

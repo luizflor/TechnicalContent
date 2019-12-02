@@ -299,13 +299,15 @@ And a static webpage is defined here:
 
 ##### Via the command line
 
-./gradlew runTodoServerPartyA
-./gradlew runTodoServerPartyB
-./gradlew runTodoServerPartyC
+    ./gradlew runTodoServerPartyA
+    ./gradlew runTodoServerPartyB
+    ./gradlew runTodoServerPartyC
 
-Run the `runTodoServer` Gradle task. By default, it connects to the node with RPC address `localhost:10006` with 
+By default, it connects to the node with RPC address `localhost:10006` with 
 the username `user1` and the password `test`, and serves the webserver on port `localhost:10050`.
 
+##### Postman
+    import file: cordapp-todo.postman_collection.json
 ##### Via IntelliJ
 
 Run the `Run Todo Server` run configuration. By default, it connects to the node with RPC address `localhost:10006` 

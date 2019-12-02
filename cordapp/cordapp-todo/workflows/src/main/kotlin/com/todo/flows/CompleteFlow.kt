@@ -53,25 +53,26 @@ object CompleteFlow {
 
         @Suspendable
         override fun call(): SignedTransaction {
-            val transaction: TransactionBuilder = transaction()
+            val state = getTodoStateAndRef(this.taskId)
+            val transaction: TransactionBuilder = transaction(state)
             val signedTransaction: SignedTransaction = verifyAndSign(transaction)
             val sessions = ArrayList<FlowSession>()
+            val participants: List<AbstractParty>
             if (transaction.outputStates().isEmpty()) {
-                return finality(signedTransaction, sessions)
+                // although no data to share, signature is still required.
+                participants = state.state.data.participants - this.ourIdentity - getNotary()
+            } else {
+                participants = (transaction.outputStates().single().data as TodoState).participants - this.ourIdentity - getNotary()
             }
-            val participants = (transaction.outputStates().single().data as TodoState).participants - this.ourIdentity - getNotary()
             participants.forEach { sessions.add(initiateFlow(it as Party)) }
             val stx = collectSignatures(signedTransaction, sessions)
             return finality(stx, sessions)
         }
 
-        private fun transaction() : TransactionBuilder {
+        private fun transaction(state: StateAndRef<TodoState>) : TransactionBuilder {
             progressTracker.currentStep = BUILD_TRANSACTION
             val notary = serviceHub.networkMapCache.notaryIdentities.single()
             val txBuilder = TransactionBuilder(notary)
-            val command = Command(TodoContract.Commands.Complete(), listOf(this.ourIdentity.owningKey))
-            txBuilder.addCommand(command)
-            val state = getTodoStateAndRef(this.taskId)
 
             txBuilder.addInputState(state)
 
@@ -79,8 +80,14 @@ object CompleteFlow {
             if(todo.participants.size > todo.participantsCompleted.size) {
                 val todoStateOutput = todo.copy(status = TodoStatus.Completed, participantsCompleted = (todo.participantsCompleted + this.ourIdentity) as MutableList<AbstractParty>)
                 txBuilder.addOutputState(todoStateOutput)
-            }
 
+                val command = Command(TodoContract.Commands.Complete(), todoStateOutput.participants.map { it.owningKey })
+                txBuilder.addCommand(command)
+            } else {
+                // no output state, consume all inputs
+                val command = Command(TodoContract.Commands.Complete(), todo.participantsCompleted.map { it.owningKey })
+                txBuilder.addCommand(command)
+            }
             return txBuilder
         }
 

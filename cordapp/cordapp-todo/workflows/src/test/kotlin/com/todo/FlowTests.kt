@@ -8,10 +8,7 @@ import net.corda.core.identity.CordaX500Name
 import net.corda.core.identity.Party
 import net.corda.core.transactions.SignedTransaction
 import net.corda.testing.common.internal.testNetworkParameters
-import net.corda.testing.node.MockNetwork
-import net.corda.testing.node.MockNetworkNotarySpec
-import net.corda.testing.node.MockNetworkParameters
-import net.corda.testing.node.TestCordapp
+import net.corda.testing.node.*
 import org.checkerframework.common.aliasing.qual.Unique
 import org.junit.After
 import org.junit.Before
@@ -53,11 +50,11 @@ abstract class FlowTests {
         return a.startFlow(sender)
     }
 
-    protected fun completeTask(taskId: UniqueIdentifier): CordaFuture<SignedTransaction> {
+    protected fun completeTask(taskId: UniqueIdentifier, node: StartedMockNode): CordaFuture<SignedTransaction> {
         val info = CompleteFlow.Info(taskId = taskId)
         val sender = CompleteFlow.CompleteSender(info)
 
-        return a.startFlow(sender)
+        return node.startFlow(sender)
     }
 
     protected fun cancelTask(taskId: UniqueIdentifier, isCancel: Boolean = true): CordaFuture<SignedTransaction> {

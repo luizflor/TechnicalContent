@@ -1,0 +1,758 @@
+{
+	"info": {
+		"_postman_id": "22fb7af5-082b-4a76-ad20-2f02a4510eae",
+		"name": "cordapp-todo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "me PartyA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27b90cbd-020d-444d-bb37-b540a77c1a07",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    let linearId = jsonData.linearId.id;",
+							"    console.log(linearId);",
+							"    pm.globals.set(\"linearId\", linearId);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/createTask?task=buy milk",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"createTask"
+					],
+					"query": [
+						{
+							"key": "task",
+							"value": "buy milk"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81bd129a-0cce-4807-a6db-4193796133e1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/cancelTask?taskId={{linearId}}&isCancel=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"cancelTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						},
+						{
+							"key": "isCancel",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel task - undo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81bd129a-0cce-4807-a6db-4193796133e1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/cancelTask?taskId={{linearId}}&isCancel=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"cancelTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						},
+						{
+							"key": "isCancel",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "complete task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/completeTask?taskId={{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"completeTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "task",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/task/{{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"task",
+						"{{linearId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add participant PartyB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/addParticipant?taskId={{linearId}}&participant=PartyB",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"addParticipant"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						},
+						{
+							"key": "participant",
+							"value": "PartyB"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add participant PartyC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/addParticipant?taskId={{linearId}}&participant=PartyC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"addParticipant"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						},
+						{
+							"key": "participant",
+							"value": "PartyC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "me PartyC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10052/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10052",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "me PartyB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10051/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10051",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove participant PartyC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10052/removeParticipant?taskId={{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10052",
+					"path": [
+						"removeParticipant"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasks PartyA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasks PartyB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10051/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10051",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasks PartyC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10052/task",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10052",
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "complete task PartyC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10052/completeTask?taskId={{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10052",
+					"path": [
+						"completeTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "complete task PartyB",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10051/completeTask?taskId={{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10051",
+					"path": [
+						"completeTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "complete task PartyA",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3cabe7b2-429f-439d-955c-c3d9a94b993c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:10050/completeTask?taskId={{linearId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10050",
+					"path": [
+						"completeTask"
+					],
+					"query": [
+						{
+							"key": "taskId",
+							"value": "{{linearId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
