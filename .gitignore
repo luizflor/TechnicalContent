@@ -67,3 +67,6 @@ build/
 bin/
 obj/
 AdventureWorksSolution/packages/
+*/.gradle
+**/.idea
+/cordapp/cordapp-count/.idea/
