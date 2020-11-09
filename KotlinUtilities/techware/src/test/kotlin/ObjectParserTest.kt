@@ -76,7 +76,7 @@ internal class ObjectParserTest {
         val c1 = Person::class.toMap()
         val f3 =" id , firstName , lastName, MI".toMap()
         assertThrows(
-            AssertionFailedError::class.java
+            java.lang.IllegalArgumentException::class.java
         ) {
 
             val errors3 = validateClass(c1, f3)
