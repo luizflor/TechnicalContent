@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cordapp-count.iml" filepath="$PROJECT_DIR$/.idea/modules/cordapp-count.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.iml" filepath="$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.main.iml" filepath="$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.test.iml" filepath="$PROJECT_DIR$/.idea/modules/clients/cordapp-count.clients.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.iml" filepath="$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.main.iml" filepath="$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.test.iml" filepath="$PROJECT_DIR$/.idea/modules/contracts/cordapp-count.contracts.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cordapp-count.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cordapp-count.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cordapp-count.test.iml" filepath="$PROJECT_DIR$/.idea/modules/cordapp-count.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.iml" filepath="$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.integrationTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.main.iml" filepath="$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.test.iml" filepath="$PROJECT_DIR$/.idea/modules/workflows/cordapp-count.workflows.test.iml" />
+    </modules>
+  </component>
+</project>

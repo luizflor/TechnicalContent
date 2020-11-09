@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="805f7e15-e3bd-40fd-a029-2f076b5301df" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XwkH0E4rSRI4GTN2bTDS7zgdYk" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager" selected="Gradle.Experiments [fatJar]">
+    <configuration name="CombineTwoFiles" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CombineTwoFiles" />
+      <module name="ITextPDFTest.main" />
+      <option name="PROGRAM_PARAMETERS" value="merge ./tmp/Spring1.pdf ./tmp/Spring2.pdf" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MergeAndCount" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MergeAndCount" />
+      <module name="ITextPDFTest.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SplitPDFFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SplitPDFFile" />
+      <module name="ITextPDFTest.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Experiments [fatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="fatJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Experiments [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.CombineTwoFiles" />
+      <item itemvalue="Application.MergeAndCount" />
+      <item itemvalue="Application.SplitPDFFile" />
+      <item itemvalue="Gradle.Experiments [fatJar]" />
+      <item itemvalue="Gradle.Experiments [jar]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Experiments [fatJar]" />
+        <item itemvalue="Gradle.Experiments [jar]" />
+        <item itemvalue="Application.CombineTwoFiles" />
+        <item itemvalue="Application.SplitPDFFile" />
+        <item itemvalue="Application.MergeAndCount" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="805f7e15-e3bd-40fd-a029-2f076b5301df" name="Default Changelist" comment="" />
+      <created>1581964452520</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581964452520</updated>
+      <workItem from="1581964456843" duration="1442000" />
+      <workItem from="1581974552018" duration="1273000" />
+      <workItem from="1582038485282" duration="5937000" />
+      <workItem from="1582158801221" duration="203000" />
+      <workItem from="1582335207125" duration="6975000" />
+      <workItem from="1582387377595" duration="7000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="560" y="167" key="#Project_Structure" timestamp="1581964655171">
+      <screen x="0" y="23" width="1680" height="947" />
+    </state>
+    <state x="560" y="167" key="#Project_Structure/0.23.1680.947@0.23.1680.947" timestamp="1581964655171" />
+    <state x="347" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582341092076">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state x="347" y="154" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582339983106" />
+    <state x="304" y="158" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.949@0.23.1680.949" timestamp="1582150519034" />
+    <state x="347" y="162" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582341092076" />
+    <state x="723" y="250" key="#xdebugger.evaluate" timestamp="1582339512454">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="723" y="250" key="#xdebugger.evaluate/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582339512454" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1582387346914">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340715" />
+    <state width="1358" height="300" key="GridCell.Tab.0.bottom/0.23.1680.947@0.23.1680.947" timestamp="1581965901192" />
+    <state width="1638" height="303" key="GridCell.Tab.0.bottom/0.23.1680.949@0.23.1680.949" timestamp="1582151059574" />
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346914" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1582387346913">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.0.center/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340714" />
+    <state width="1358" height="300" key="GridCell.Tab.0.center/0.23.1680.947@0.23.1680.947" timestamp="1581965901192" />
+    <state width="1638" height="303" key="GridCell.Tab.0.center/0.23.1680.949@0.23.1680.949" timestamp="1582151059574" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346913" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1582387346913">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.0.left/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340713" />
+    <state width="1358" height="300" key="GridCell.Tab.0.left/0.23.1680.947@0.23.1680.947" timestamp="1581965901191" />
+    <state width="1638" height="303" key="GridCell.Tab.0.left/0.23.1680.949@0.23.1680.949" timestamp="1582151059573" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346913" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1582387346914">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.0.right/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340714" />
+    <state width="1358" height="300" key="GridCell.Tab.0.right/0.23.1680.947@0.23.1680.947" timestamp="1581965901192" />
+    <state width="1638" height="303" key="GridCell.Tab.0.right/0.23.1680.949@0.23.1680.949" timestamp="1582151059574" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346914" />
+    <state width="1638" height="302" key="GridCell.Tab.1.bottom" timestamp="1582387346910">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.1.bottom/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340717" />
+    <state width="1358" height="300" key="GridCell.Tab.1.bottom/0.23.1680.947@0.23.1680.947" timestamp="1581965901193" />
+    <state width="1638" height="303" key="GridCell.Tab.1.bottom/0.23.1680.949@0.23.1680.949" timestamp="1582151059575" />
+    <state width="1638" height="302" key="GridCell.Tab.1.bottom/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346910" />
+    <state width="1638" height="302" key="GridCell.Tab.1.center" timestamp="1582387346910">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.1.center/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340716" />
+    <state width="1358" height="300" key="GridCell.Tab.1.center/0.23.1680.947@0.23.1680.947" timestamp="1581965901193" />
+    <state width="1638" height="303" key="GridCell.Tab.1.center/0.23.1680.949@0.23.1680.949" timestamp="1582151059575" />
+    <state width="1638" height="302" key="GridCell.Tab.1.center/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346910" />
+    <state width="1638" height="302" key="GridCell.Tab.1.left" timestamp="1582387346910">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.1.left/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340715" />
+    <state width="1358" height="300" key="GridCell.Tab.1.left/0.23.1680.947@0.23.1680.947" timestamp="1581965901193" />
+    <state width="1638" height="303" key="GridCell.Tab.1.left/0.23.1680.949@0.23.1680.949" timestamp="1582151059575" />
+    <state width="1638" height="302" key="GridCell.Tab.1.left/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346910" />
+    <state width="1638" height="302" key="GridCell.Tab.1.right" timestamp="1582387346910">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="364" key="GridCell.Tab.1.right/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340340717" />
+    <state width="1358" height="300" key="GridCell.Tab.1.right/0.23.1680.947@0.23.1680.947" timestamp="1581965901193" />
+    <state width="1638" height="303" key="GridCell.Tab.1.right/0.23.1680.949@0.23.1680.949" timestamp="1582151059575" />
+    <state width="1638" height="302" key="GridCell.Tab.1.right/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582387346910" />
+    <state x="766" y="465" key="ReplaceDuplicatesPrompt" timestamp="1582335342483">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="766" y="465" key="ReplaceDuplicatesPrompt/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582335342483" />
+    <state x="730" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1582335208704">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state x="639" y="345" key="com.intellij.ide.util.TipDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1582038487259" />
+    <state x="639" y="334" key="com.intellij.ide.util.TipDialog/0.23.1680.947@0.23.1680.947" timestamp="1581974597074" />
+    <state x="730" y="344" key="com.intellij.ide.util.TipDialog/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582335208704" />
+    <state x="698" y="294" width="524" height="484" key="extract.method.dialog" timestamp="1582340754248">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state x="698" y="300" width="524" height="484" key="extract.method.dialog/0.0.1920.1080/1920.-51.1920.1200@0.0.1920.1080" timestamp="1582340414551" />
+    <state x="698" y="294" key="extract.method.dialog/0.23.1920.977/1920.-28.1920.1177@0.23.1920.977" timestamp="1582340754248" />
+    <state x="552" y="226" width="816" height="550" key="find.popup" timestamp="1581965762732">
+      <screen x="0" y="23" width="1680" height="947" />
+    </state>
+    <state x="552" y="226" width="816" height="550" key="find.popup/0.23.1680.947@0.23.1680.947" timestamp="1581965762732" />
+    <state x="505" y="230" width="670" height="676" key="search.everywhere.popup" timestamp="1582149434242">
+      <screen x="0" y="23" width="1680" height="949" />
+    </state>
+    <state x="505" y="230" width="670" height="676" key="search.everywhere.popup/0.23.1680.949@0.23.1680.949" timestamp="1582149434242" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CombineTwoFiles.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CombineTwoFiles.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

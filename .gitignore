@@ -70,3 +70,12 @@ AdventureWorksSolution/packages/
 */.gradle
 **/.idea
 /cordapp/cordapp-count/.idea/
+/.gradle/
+/.idea/
+/cordapp/cordapp-count/.gradle/
+/cordapp/cordapp-count/.idea/
+/cordapp/cordapp-count/.settings/
+/cordapp/cordapp-count/.vscode/
+/KotlinUtilities/.gradle/
+/KotlinUtilities/.idea/
+

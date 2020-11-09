@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":clients:test" external.linked.project.path="$MODULE_DIR$/../../../clients" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="com.count" external.system.module.type="sourceSet" external.system.module.version="0.1" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+      </configuration>
+    </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-java-parameters" />
+        </compilerSettings>
+        <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/../../../clients/build/classes/kotlin/test" />
+          <option name="classpath" value="$MODULE_DIR$/../../../clients/build/classes/kotlin/main:/Users/luizsilva/Projects/Research/TechnicalContent/cordapp/cordapp-count/clients/build/resources/main:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.corda/corda-rpc/4.1/e048dc24ef018e59bac4634c8bbc11242410db7/corda-rpc-4.1.jar:/Users/luizsilva/Projects/Research/TechnicalContent/cordapp/cordapp-count/workflows/build/libs/workflows-0.1.jar:/Users/luizsilva/Projects/Research/TechnicalContent/cordapp/cordapp-count/contracts/build/libs/contracts-0.1.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-websocket/2.0.2.RELEASE/92df00f5f6e0248bd57ed68f6124957737adf9f0/spring-boot-starter-websocket-2.0.2.RELEASE.jar:/Users/luizsilva/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.11.2/log4j-slf4j-impl-2.11.2.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-web/2.11.2/d11ebc03fdf773d32143e0f7ea0fc131c21311e7/log4j-web-2.11.2.jar:/Users/luizsilva/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.corda/corda-node-api/4.1/dd72047f230f64be94a0d94328c70af7eefa01e4/corda-node-api-4.1.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.corda/corda-serialization/4.1/bc1e893c9654713a5e679cd9431f9b2fe40b8e2e/corda-serialization-4.1.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.corda/corda-core/4.1/8e8d4470222495c9d0f60e6dedbb68f9e973e47b/corda-core-4.1.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.github.ben-manes.caffeine/caffeine/2.6.2/c8fd8817f9d2b2ced82f8968e0dd943aab557de0/caffeine-2.6.2.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-core/0.7.10/3916162ad638c8a6cb8f3588a9f080dc792bc052/quasar-core-0.7.10-jdk8.jar:/Users/luizsilva/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.2.71/kotlin-stdlib-jdk8-1.2.71.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.corda/corda/4.1/edd4227c36b5680f6ca7a8e099e8a9e8af628f84/corda-4.1.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/2.0.2.RELEASE/b6ef0cf4d0a7c6c7e93ff524b84cd1d8f87f67d9/spring-boot-starter-web-2.0.2.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.0.2.RELEASE/5edda979838ced5314b8f58a958fe9d6b4b3badd/spring-boot-starter-json-2.0.2.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter/2.0.2.RELEASE/1cda94f0dfcf2b065191782a54b84d2abf96391/spring-boot-starter-2.0.2.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-messaging/5.0.6.RELEASE/aa1d75a9595ac8681a82589d28573937ec1becee/spring-messaging-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-websocket/5.0.6.RELEASE/c051abdaa9f63e85ac194d13ad5a065eeecffc19/spring-websocket-5.0.6.RELEASE.jar:/Users/luizsilva/.m2/repository/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.zaxxer/HikariCP/2.5.1/b896b711e2d98fedf403de590559a123b5fbf1a6/HikariCP-2.5.1.jar:/Users/luizsilva/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/Users/luizsilva/.m2/repository/org/apache/logging/log4j/log4j-core/2.11.2/log4j-core-2.11.2.jar:/Users/luizsilva/.m2/repository/org/apache/logging/log4j/log4j-api/2.11.2/log4j-api-2.11.2.jar:/Users/luizsilva/.m2/repository/org/jetbrains/kotlin/kotlin-reflect/1.2.71/kotlin-reflect-1.2.71.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/25.1-jre/6c57e4b22b44e89e548b5c9f70f0c45fe10fb0b4/guava-25.1-jre.jar:/Users/luizsilva/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/luizsilva/.m2/repository/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-jexl3/3.0/75aba6fe6659500bc7fcd420adca9c04ec9a379a/commons-jexl3-3.0.jar:/Users/luizsilva/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/Users/luizsilva/.m2/repository/net/i2p/crypto/eddsa/0.2.0/eddsa-0.2.0.jar:/Users/luizsilva/.m2/repository/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.jar:/Users/luizsilva/.m2/repository/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.6.Final/42c7130757c3f67dda008d8edb28b381a09a7ce6/hibernate-core-5.3.6.Final.jar:/Users/luizsilva/.m2/repository/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar:/Users/luizsilva/.m2/repository/io/github/classgraph/classgraph/4.6.12/classgraph-4.6.12.jar:/Users/luizsilva/.m2/repository/com/mattbertolini/liquibase-slf4j/2.0.0/liquibase-slf4j-2.0.0.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-collections4/4.1/a4cf4688fe1c7e3a63aa636cc96d013af537768e/commons-collections4-4.1.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-amqp-protocol/2.6.2/artemis-amqp-protocol-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-jms-client/2.6.2/artemis-jms-client-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-server/2.6.2/artemis-server-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-jdbc-store/2.6.2/artemis-jdbc-store-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-core-client/2.6.2/artemis-core-client-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-journal/2.6.2/artemis-journal-2.6.2.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-commons/2.6.2/artemis-commons-2.6.2.jar:/Users/luizsilva/.m2/repository/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/commons-fileupload/commons-fileupload/1.3.3/4ff14d809195b711fd6bcc87e6777f886730ca1/commons-fileupload-1.3.3.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.typesafe/config/1.3.3/4b68c2d5d0403bb4015520fcfabc88d0cbc4d117/config-1.3.3.jar:/Users/luizsilva/.m2/repository/org/apache/qpid/proton-j/0.33.0/proton-j-0.33.0.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.liquibase/liquibase-core/3.5.5/c65051f327382018bd09c30380f25eac96f210da/liquibase-core-3.5.5.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jdk8/2.9.5/23e37f085279ba316c0df923513b81609e1d1f6/jackson-datatype-jdk8-2.9.5.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.9.5/d1f0d11e816bc04e222a261106ca138801841c2d/jackson-datatype-jsr310-2.9.5.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-parameter-names/2.9.5/f824c60751ffb7bfc3a0d30dfe0e42317d8e67f5/jackson-module-parameter-names-2.9.5.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.9.5/3490508379d065fe3fcb80042b62f630f7588606/jackson-databind-2.9.5.jar:/Users/luizsilva/.m2/repository/io/dropwizard/metrics/metrics-core/3.2.3/metrics-core-3.2.3.jar:/Users/luizsilva/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.9/HdrHistogram-2.1.9.jar:/Users/luizsilva/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/luizsilva/.m2/repository/com/esotericsoftware/kryo/4.0.0/kryo-4.0.0.jar:/Users/luizsilva/.m2/repository/de/javakaffee/kryo-serializers/0.42/kryo-serializers-0.42.jar:/Users/luizsilva/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.2.71/kotlin-stdlib-jdk7-1.2.71.jar:/Users/luizsilva/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.2.71/kotlin-stdlib-1.2.71.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/2.0.2.RELEASE/f4b25e753e4955337a138d8b1550236b5efe5b3b/spring-boot-autoconfigure-2.0.2.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/2.0.2.RELEASE/15012cf02e9f77938244e554f0598535fdd1cb38/spring-boot-2.0.2.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/2.0.2.RELEASE/cedbfb18762e1c220007c768bfc5b773f5b30f8a/spring-boot-starter-tomcat-2.0.2.RELEASE.jar:/Users/luizsilva/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/5.0.6.RELEASE/1361c5d1cf46665ee01de5dc1ca447c3be174c19/spring-webmvc-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.0.6.RELEASE/89e89de3025165998118590613aedc6df8d64af6/spring-web-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.0.6.RELEASE/8b73b742ef0ddce04f0f1068f305de240b00ce0d/spring-context-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.0.6.RELEASE/74078df698992054c1c1a8f705763a6c7b4b914c/spring-aop-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.0.6.RELEASE/d609b83cd8a71650a70778cf8d02c9a05b9161fe/spring-beans-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.0.6.RELEASE/dec57ae5e6f0dfd4c6cfc199aa13ed268c3e1a65/spring-expression-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.0.6.RELEASE/984a52455b1be596b7f1a29f62d21d2f483eb764/spring-core-5.0.6.RELEASE.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.hibernate.validator/hibernate-validator/6.0.9.Final/b149e4cce82379f11f6129eb3187ca8ae5404005/hibernate-validator-6.0.9.Final.jar:/Users/luizsilva/.m2/repository/commons-logging/commons-logging/1.2/commons-logging-1.2.jar:/Users/luizsilva/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.4.Final/hibernate-commons-annotations-5.0.4.Final.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-native/2.6.2/artemis-native-2.6.2.jar:/Users/luizsilva/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/Users/luizsilva/.m2/repository/org/javassist/javassist/3.23.1-GA/javassist-3.23.1-GA.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.8.17/9a36bc0f6eb9f941da0526ad89c4fb4b8ab580f0/byte-buddy-1.8.17.jar:/Users/luizsilva/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/luizsilva/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.1.1.Final/jboss-transaction-api_1.2_spec-1.1.1.Final.jar:/Users/luizsilva/.m2/repository/org/jboss/jandex/2.0.5.Final/jandex-2.0.5.Final.jar:/Users/luizsilva/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/Users/luizsilva/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/luizsilva/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/Users/luizsilva/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar:/Users/luizsilva/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar:/Users/luizsilva/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/luizsilva/.m2/repository/org/jgroups/jgroups/3.6.13.Final/jgroups-3.6.13.Final.jar:/Users/luizsilva/.m2/repository/org/apache/geronimo/specs/geronimo-json_1.0_spec/1.0-alpha-1/geronimo-json_1.0_spec-1.0-alpha-1.jar:/Users/luizsilva/.m2/repository/org/apache/johnzon/johnzon-core/0.9.5/johnzon-core-0.9.5.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-epoll/4.1.24.Final/6c2569df1688ea1c6596cef9df8d1a47f8066e4a/netty-transport-native-epoll-4.1.24.Final-linux-x86_64.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-kqueue/4.1.24.Final/acdf0603d63bbfbc0c55f625e75e12408cd8395e/netty-transport-native-kqueue-4.1.24.Final-osx-x86_64.jar:/Users/luizsilva/.m2/repository/io/netty/netty-codec-http/4.1.24.Final/netty-codec-http-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-handler/4.1.24.Final/netty-handler-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-codec/4.1.24.Final/netty-codec-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.24.Final/netty-transport-native-unix-common-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-transport/4.1.24.Final/netty-transport-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-buffer/4.1.24.Final/netty-buffer-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-resolver/4.1.24.Final/netty-resolver-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/io/netty/netty-common/4.1.24.Final/netty-common-4.1.24.Final.jar:/Users/luizsilva/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar:/Users/luizsilva/.m2/repository/org/yaml/snakeyaml/1.17/snakeyaml-1.17.jar:/Users/luizsilva/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.9.5/a22ac51016944b06fd9ffbc9541c6e7ce5eea117/jackson-core-2.9.5.jar:/Users/luizsilva/.m2/repository/org/apache/activemq/artemis-selector/2.6.2/artemis-selector-2.6.2.jar:/Users/luizsilva/.m2/repository/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.jar:/Users/luizsilva/.m2/repository/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar:/Users/luizsilva/.m2/repository/org/objenesis/objenesis/2.2/objenesis-2.2.jar:/Users/luizsilva/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.2.71/kotlin-stdlib-common-1.2.71.jar:/Users/luizsilva/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.0.6.RELEASE/295ee4e8657e9c1fd327735c01d5fbce339cc44d/spring-jcl-5.0.6.RELEASE.jar:/Users/luizsilva/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.31/tomcat-embed-websocket-8.5.31.jar:/Users/luizsilva/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.31/tomcat-embed-core-8.5.31.jar:/Users/luizsilva/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.31/tomcat-embed-el-8.5.31.jar:/Users/luizsilva/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/2.0.0/518929596ee3249127502a8573b2e008e2d51ed3/checker-qual-2.0.0.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.1.3/39b109f2cd352b2d71b52a3b5a1a9850e1dc304b/error_prone_annotations-2.1.3.jar:/Users/luizsilva/.m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar:/Users/luizsilva/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar:/Users/luizsilva/.m2/repository/org/apache/geronimo/specs/geronimo-jms_2.0_spec/1.0-alpha-2/geronimo-jms_2.0_spec-1.0-alpha-2.jar:/Users/luizsilva/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-annotations-api/8.5.31/f0758d8b5d1404cc25f98945bdd5959699658b4a/tomcat-annotations-api-8.5.31.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="clients" />
+          <option name="jvmTarget" value="1.8" />
+          <option name="friendPaths">
+            <array>
+              <option value="$MODULE_DIR$/../../../clients/build/classes/java/main" />
+              <option value="$MODULE_DIR$/../../../clients/build/classes/kotlin/main" />
+            </array>
+          </option>
+          <option name="languageVersion" value="1.2" />
+          <option name="apiVersion" value="1.2" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="coroutinesState" value="warn" />
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output-test url="file://$MODULE_DIR$/../../../clients/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../clients/src/test" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="cordapp-count.clients.main" />
+    <orderEntry type="library" name="Gradle: net.corda:corda-rpc:4.1" level="project" />
+    <orderEntry type="module" module-name="cordapp-count.workflows.main" />
+    <orderEntry type="module" module-name="cordapp-count.contracts.main" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-websocket:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-slf4j-impl:2.11.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-web:2.11.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: net.corda:corda-node-api:4.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.corda:corda-serialization:4.1" level="project" />
+    <orderEntry type="library" name="Gradle: net.corda:corda-core:4.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.ben-manes.caffeine:caffeine:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: co.paralleluniverse:quasar-core:jdk8:0.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.71" level="project" />
+    <orderEntry type="library" name="Gradle: net.corda:corda:4.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-json:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-messaging:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-websocket:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: com.zaxxer:HikariCP:2.5.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-core:2.11.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.logging.log4j:log4j-api:2.11.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.2.71" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.guava:guava:25.1-jre" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: io.reactivex:rxjava:1.3.8" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-jexl3:3.0" level="project" />
+    <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Gradle: net.i2p.crypto:eddsa:0.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.bouncycastle:bcpkix-jdk15on:1.60" level="project" />
+    <orderEntry type="library" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.60" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.3.6.Final" level="project" />
+    <orderEntry type="library" name="Gradle: javax.persistence:javax.persistence-api:2.2" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.classgraph:classgraph:4.6.12" level="project" />
+    <orderEntry type="library" name="Gradle: com.mattbertolini:liquibase-slf4j:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-collections4:4.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-amqp-protocol:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-jms-client:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-server:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-jdbc-store:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-core-client:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-journal:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-commons:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils:1.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: commons-fileupload:commons-fileupload:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.typesafe:config:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.qpid:proton-j:0.33.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.liquibase:liquibase-core:3.5.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: io.dropwizard.metrics:metrics-core:3.2.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.hdrhistogram:HdrHistogram:2.1.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.latencyutils:LatencyUtils:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.esotericsoftware:kryo:4.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: de.javakaffee:kryo-serializers:0.42" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.2.71" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:2.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: javax.annotation:javax.annotation-api:1.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-webmvc:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-web:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-context:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-aop:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-beans:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-expression:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-core:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.validator:hibernate-validator:6.0.9.Final" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.4.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-native:2.6.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.yaml:snakeyaml:1.19" level="project" />
+    <orderEntry type="library" name="Gradle: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.javassist:javassist:3.23.1-GA" level="project" />
+    <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy:1.8.17" level="project" />
+    <orderEntry type="library" name="Gradle: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.1.1.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.jboss:jandex:2.0.5.Final" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml:classmate:1.3.4" level="project" />
+    <orderEntry type="library" name="Gradle: javax.activation:javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Gradle: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.ow2.asm:asm:5.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.iq80.snappy:snappy:0.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jgroups:jgroups:3.6.13.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.geronimo.specs:geronimo-json_1.0_spec:1.0-alpha-1" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.johnzon:johnzon-core:0.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-kqueue:osx-x86_64:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec-http:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-handler:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-codec:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport-native-unix-common:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-transport:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-resolver:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: io.netty:netty-common:4.1.24.Final" level="project" />
+    <orderEntry type="library" name="Gradle: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.yaml:snakeyaml:1.17" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.9.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.activemq:artemis-selector:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.esotericsoftware:reflectasm:1.11.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.esotericsoftware:minlog:1.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.objenesis:objenesis:2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-jcl:5.0.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-websocket:8.5.31" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-core:8.5.31" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-el:8.5.31" level="project" />
+    <orderEntry type="library" name="Gradle: javax.validation:validation-api:2.0.1.Final" level="project" />
+    <orderEntry type="library" name="Gradle: org.checkerframework:checker-qual:2.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.1.3" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.j2objc:j2objc-annotations:1.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.geronimo.specs:geronimo-jms_2.0_spec:1.0-alpha-2" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.tomcat:tomcat-annotations-api:8.5.31" level="project" />
+  </component>
+  <component name="TestModuleProperties" production-module="cordapp-count.clients.main" />
+</module>
