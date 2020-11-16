@@ -3,6 +3,11 @@ package com.techware.utilities
 //import org.junit.jupiter.api.Assertions
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.full.primaryConstructor
@@ -42,6 +47,42 @@ fun validateClass(
         }
     }
     return errors
+}
+
+val formatter = DateTimeFormatter.ofPattern("M/d/yyyy")
+// parse string to instant
+
+fun String.fromDateToInstant(): Instant {
+    val localDate = LocalDate.parse(this, formatter)
+    return localDate.atStartOfDay(ZoneId.of(ZoneOffset.UTC.id)).toInstant()!!
+}
+
+fun String.fromDateTimeToInstant(): Instant {
+    val formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
+//        .withLocale(Locale.US)
+        .withZone(ZoneOffset.UTC)
+    val localDate = LocalDate.parse(this, formatter)
+    return localDate.atStartOfDay(ZoneId.of(ZoneOffset.UTC.id)).toInstant()!!
+}
+
+// convert instant to date
+fun Instant.toDate(): LocalDate {
+    return this.atOffset(ZoneOffset.UTC).toLocalDate()
+}
+
+fun LocalDate.toStringDate(): String {
+    return this.format(formatter)!!
+}
+// format instant to string date
+fun Instant.toStringDate(): String {
+    return formatter.format(this.toDate())!!
+}
+// format instant to string datetime
+fun Instant.toStringDateTime(): String {
+    val formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
+//        .withLocale(Locale.US)
+        .withZone(ZoneOffset.UTC)
+    return formatter.format(this)!!
 }
 
 class ObjectParser {
@@ -92,6 +133,14 @@ class ObjectParser {
         ): Any {
             return when (type) {
                 "kotlin.Int" ->  value.toInt()
+                "kotlin.Int" ->  value.toInt()
+                "kotlin.Short" ->  value.toShort()
+                "kotlin.Byte" ->  value.toByte()
+                "kotlin.Boolean" ->  value.toBoolean()
+                "kotlin.Float" ->  value.toFloat()
+                "kotlin.Double" ->  value.toDouble()
+                "java.time.Instant" ->  value.fromDateTimeToInstant()!!
+                "java.time.LocalDate" ->  value.fromDateToInstant()!!.toDate()
                 "kotlin.String" ->  value
                 else -> value
             }

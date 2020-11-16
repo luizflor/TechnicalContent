@@ -1,15 +1,22 @@
+import com.sun.org.apache.xpath.internal.operations.Bool
+import com.techware.utilities.*
 import com.techware.utilities.ObjectParser.Companion.convertStringToObject
 import com.techware.utilities.ObjectParser.Companion.cvsToObj
 import com.techware.utilities.ObjectParser.Companion.getCvsFile
 import com.techware.utilities.ObjectParser.Companion.parse
-import com.techware.utilities.toMap
-import com.techware.utilities.validateClass
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.opentest4j.AssertionFailedError
+import java.time.Instant
+import java.time.LocalDate
 
+//data class Person2(val id: Int, val firstName: String, val lastName: String, val birthDate: LocalDate, val isModified: Boolean, val timestamp: Instant, val salary: Double){
+//    override fun toString(): String {
+//        return "Person2(id=$id, firstName='$firstName', lastName='$lastName', birthDate=$birthDate, isModified=$isModified, timestamp=$timestamp, salary=$salary)"
+//    }
+//}
 
 internal class ObjectParserTest {
 
@@ -27,6 +34,13 @@ internal class ObjectParserTest {
         val person = Person(1, "f1", "l1")
         assertNotEquals(person, null)
     }
+
+    @Test
+    fun createPerson2() {
+        val person = Person2(1,"f1","l1","02/29/2020".fromDateToInstant().toDate(),true,"2020-02-29T00:00:00Z".fromDateTimeToInstant(),1.23)
+        assertNotEquals(person, null)
+    }
+
     @Test
     fun stringToMap() {
         val h1 = " A , b , C  ".toMap()
@@ -131,6 +145,42 @@ internal class ObjectParserTest {
         val isString = convertStringToObject("kotlin.String", "A")
         assertTrue(isString is String)
         assertEquals("A",isString)
+
+        // Test for Short
+        val isShort = convertStringToObject("kotlin.Short", "1")
+        assertTrue(isShort is Short)
+        assertEquals(1.toShort(),isShort)
+
+        // Test for Byte
+        val isByte = convertStringToObject("kotlin.Byte", "1")
+        assertTrue(isByte is Byte)
+        assertEquals(1.toByte(),isByte)
+
+        // Test for Boolean
+        val isBoolean = convertStringToObject("kotlin.Boolean", "true")
+        assertTrue(isBoolean is Boolean)
+        assertEquals(true,isBoolean)
+
+        // Test for Float
+        val isFloat = convertStringToObject("kotlin.Float", "1.23")
+        assertTrue(isFloat is Float)
+        assertEquals(1.23.toFloat(),isFloat)
+
+        // Test for Double
+        val isDouble = convertStringToObject("kotlin.Double", "1.23")
+        assertTrue(isDouble is Double)
+        assertEquals(1.23.toDouble(),isDouble)
+
+        // Test for Instant
+        val isInstant = convertStringToObject("java.time.Instant", "2020-02-29T00:00:00Z")
+        assertTrue(isInstant is java.time.Instant)
+        assertEquals("2020-02-29T00:00:00Z",isInstant.toString())
+
+        // Test for LocalDate
+        val isLocalDate = convertStringToObject("java.time.LocalDate", "2/29/2020")
+        assertTrue(isLocalDate is java.time.LocalDate)
+        assertEquals("2020-02-29",isLocalDate.toString())
+        assertEquals("2/29/2020",(isLocalDate as java.time.LocalDate).toStringDate())
     }
 
     /**
@@ -168,6 +218,17 @@ internal class ObjectParserTest {
         }
     }
 
+
+    @Test
+    fun createObjectFromCvsFilePerson2() {
+        val listOfObj = parse(FILE_NAME_PERSON2, Person2::class)
+        println(listOfObj)
+        assertEquals(2, listOfObj.size)
+        listOfObj.forEach {
+            assertTrue(it is Person2)
+        }
+    }
+
     @Test
     fun createObjectFromInvalidCvsFile() {
         assertThrows(java.lang.IllegalArgumentException::class.java){
@@ -177,6 +238,7 @@ internal class ObjectParserTest {
 
     companion object {
         const val FILE_NAME = "./src/test/resources/file1.csv"
+        const val FILE_NAME_PERSON2 = "./src/test/resources/person2.csv"
         const val INVALID_FILE_NAME = "./src/test/resources/invalidFile1.csv"
     }
 
