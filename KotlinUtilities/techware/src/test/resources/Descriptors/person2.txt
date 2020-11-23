@@ -1,0 +1,7 @@
+id, int
+firstname, string
+lastname, string
+birthdate, date
+ismodified, boolean
+timestamp, instant
+salary, double

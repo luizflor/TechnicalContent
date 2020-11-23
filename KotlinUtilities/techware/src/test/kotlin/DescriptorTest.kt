@@ -1,4 +1,5 @@
 import com.techware.utilities.*
+import com.techware.utilities.Descriptor.Companion.generateDescriptor
 import com.techware.utilities.Descriptor.Companion.types
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -23,17 +24,30 @@ class DescriptorTest {
     ln, string
      */
     @Test
-    fun getDescriptor() {
-        val c1 = Person::class.toMap()
-        println(c1)
-        var str = StringBuilder()
+    fun testDescriptor() {
+        val personStr ="id, int\n" +
+                "firstname, string\n" +
+                "lastname, string\n"
+        val person2Str="id, int\n" +
+                "firstname, string\n" +
+                "lastname, string\n" +
+                "birthdate, date\n" +
+                "ismodified, boolean\n" +
+                "timestamp, instant\n" +
+                "salary, double\n"
+        val personDescriptor = generateDescriptor(Person::class)
+        println(personDescriptor)
+        assertEquals(personStr, personDescriptor)
 
-        c1.forEach { t, u ->
-            val type = types[u.toString()]
-            str.appendln("${t.toLowerCase()}, ${type?.toLowerCase()}")
-            println("$t - $u")
-        }
-        println(str)
+        val person2Descriptor = generateDescriptor(Person2::class)
+        println(person2Descriptor)
+        assertEquals(person2Str, person2Descriptor)
+    }
+
+    @Test
+    fun generatorDescriptorTest() {
+        Descriptor.generateDescriptor(Person::class, PATH_DESTINATION_KOTLIN)
+        Descriptor.generateDescriptor(Person2::class, PATH_DESTINATION_KOTLIN)
     }
 
     @Test
@@ -115,5 +129,97 @@ class DescriptorTest {
         println(instant2)
         assertEquals("2020-02-29T00:00:00Z", instant2?.toStringDateTime())
 
+    }
+
+    @Test
+    fun generateTypeFromClassTest() {
+        val typeListPerson = Descriptor.generateTypeFromClass(Person::class)
+        println(typeListPerson)
+
+        val typeListPerson2 = Descriptor.generateTypeFromClass(Person2::class)
+        println(typeListPerson2)
+
+    }
+
+    @Test
+    fun generateClassTest() {
+
+        val descriptorPersonStr ="id, int\n" +
+                "firstname, string\n" +
+                "lastname, string\n"
+
+        val generatedPersonClass = Descriptor.generateClassFromString(descriptorPersonStr, "Person")
+        println(generatedPersonClass)
+
+        val personList = descriptorPersonStr.split('\n')
+        val generatedPersonClass2 = Descriptor.generateClassFromList(personList, "Person")
+        println(generatedPersonClass2)
+
+
+        var personStr ="data class Person(\n" +
+                "val id: Int, val firstname: String, val lastname: String) {\n" +
+                "\toverride fun toString(): String {\n" +
+                "\t\treturn \"Person(id=\$id, firstname=\$firstname, lastname=\$lastname)\"\n" +
+                "\t}\n" +
+                "}\n"
+
+
+        assertEquals(personStr,generatedPersonClass)
+
+        val descriptorPerson2Str="id, int\n" +
+                "firstname, string\n" +
+                "lastname, string\n" +
+                "birthdate, date\n" +
+                "ismodified, boolean\n" +
+                "timestamp, instant\n" +
+                "salary, double\n"
+        val person2List= descriptorPerson2Str.split('\n')
+
+        val generatedPerson2Class = Descriptor.generateClassFromString(descriptorPerson2Str, "Person2")
+        println(generatedPerson2Class)
+
+        val person2Str = "import java.util.*\n" +
+                "import java.time.Instant\n" +
+                "data class Person2(\n" +
+                "val id: Int, val firstname: String, val lastname: String, val birthdate: Date, val ismodified: Boolean, val timestamp: Instant, val salary: Double) {\n" +
+                "\toverride fun toString(): String {\n" +
+                "\t\treturn \"Person2(id=\$id, firstname=\$firstname, lastname=\$lastname, birthdate=\$birthdate, ismodified=\$ismodified, timestamp=\$timestamp, salary=\$salary)\"\n" +
+                "\t}\n" +
+                "}\n"
+        assertEquals(person2Str,generatedPerson2Class)
+
+
+    }
+
+    @Test
+    fun capitalTest() {
+        val name = "luiz"
+        name.capitalize()
+        println(name.capitalize())
+    }
+
+    @Test
+    fun generateClassFile() {
+        Descriptor.generateClass(fileName = FILE_NAME_PERSON1, className = "Person", packageName = "model",targetFolder =  PATH_DESTINATION_MODEL)
+    }
+
+    @Test
+    fun generateClassFromFileTest() {
+        val generatedClass = Descriptor.generateClass(fileName = FILE_NAME_PERSON1, className = "Person", packageName = "model")
+        println(generatedClass)
+
+        val expectedPersonClass = "data class Person(\n" +
+                "val id: Int, val firstname: String, val lastname: String) {\n" +
+                "\toverride fun toString(): String {\n" +
+                "\t\treturn \"Person(id=\$id, firstname=\$firstname, lastname=\$lastname)\"\n" +
+                "\t}\n" +
+                "}\n"
+        assertEquals(expectedPersonClass,generatedClass)
+    }
+    companion object {
+//        const val FILE_NAME_PERSON1 = "./src/test/resources/Descriptors/person1.txt"
+        const val FILE_NAME_PERSON1 = "/Users/luizsilva/Projects/Research/TechnicalContent/KotlinUtilities/KotlinTests/src/main/kotlin/generator/kotlin/Person.csv"
+        const val PATH_DESTINATION_MODEL = "/Users/luizsilva/Projects/Research/TechnicalContent/KotlinUtilities/KotlinTests/src/main/kotlin/model"
+        const val PATH_DESTINATION_KOTLIN = "/Users/luizsilva/Projects/Research/TechnicalContent/KotlinUtilities/KotlinTests/src/main/kotlin/generator/kotlin"
     }
 }

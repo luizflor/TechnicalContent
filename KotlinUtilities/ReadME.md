@@ -3,6 +3,7 @@
 ## Running
 ```$xslt
 java -jar parse.jar /Users/luizsilva/Projects/Research/TechnicalContent/KotlinUtilities/src/main/resources/file1.csv
+java -jar parse.jar ./src/main/resources/config.properties
 ```
 
 ## TODO

@@ -2,3 +2,5 @@ rootProject.name = 'KotlinUtilities'
 
 include(':model')
 include(':techware')
+include 'KotlinTests'
+

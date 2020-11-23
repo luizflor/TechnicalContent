@@ -39,7 +39,7 @@ fun validateClass(
     c1: Map<String, KType>,
     f1: Map<String, Int>
 ): MutableList<String> {
-    require(c1.size == f1.size) {"class fieds and list of fields needs to be the same size"}
+    require(c1.size == f1.size) {"class fieds and list of fields needs to be the same size class size:${c1.size} and file size: ${f1.size}"}
     val errors = mutableListOf<String>()
     c1.forEach {
         if (!f1.containsKey(it.key)) {
