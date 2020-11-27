@@ -100,14 +100,33 @@ class Descriptor {
             return generateClassFromList(descriptor = cvsData, className = className)
         }
 
+        /**
+         * Read descriptor file into List<Type>
+         */
+        fun getDescriptorFromFile(fileName: String): List<Type> {
+            val cvsData = ObjectParser.getCvsFile(fileName)
+            require(cvsData.isNotEmpty()){"invalid file: $fileName"}
+            return convertDescriptorToTypeList(cvsData)
+        }
+
+        fun saveToFile(text:String, className: String, targetFolder: String, extentionName: String) {
+            val folder = File(targetFolder)
+            folder.mkdirs()
+            val fileName = "$targetFolder/$className$extentionName"
+            val file = File(fileName)
+            file.writeText(text)
+        }
+
         fun generateClass(fileName:String, className: String, packageName: String, targetFolder: String) {
             val generatedClass = generateClass(fileName, className, packageName)
 
-            val folder = File(targetFolder)
-            folder.mkdir()
-            val fileName = "$targetFolder/$className.kt"
-            val file = File(fileName)
-            file.writeText(generatedClass)
+            saveToFile(text=generatedClass,className = className,targetFolder = targetFolder,extentionName = ".kt")
+
+//            val folder = File(targetFolder)
+//            folder.mkdir()
+//            val fileName = "$targetFolder/$className.kt"
+//            val file = File(fileName)
+//            file.writeText(generatedClass)
         }
 
         /**
