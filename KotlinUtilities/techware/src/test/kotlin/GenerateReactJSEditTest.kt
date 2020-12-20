@@ -127,7 +127,7 @@ class GenerateReactJSEditTest {
                     "\n" +
                     "        event.preventDefault();\n" +
                     "        const { id, firstname, lastname, birthdate, ismodified, timestamp, salary } = this.state;\n" +
-                    "        if ( id && firstname && lastname && birthdate && ismodified && timestamp && salary ) {\n" +
+                    "        if ( id && firstname && lastname && birthdate && timestamp && salary ) {\n" +
                     "            const newPerson = {\n" +
                     "               id, firstname, lastname, birthdate, ismodified, timestamp, salary\n" +
                     "            }\n" +
@@ -146,66 +146,65 @@ class GenerateReactJSEditTest {
     fun generateComponentRenderTest() {
         val typeList = getTypeListPerson2()
         val render = GenerateReactJSEdit.generateComponentRender("person", typeList)
-        println(render)
+//        println(render)
 
         val expected =
-            "    render() {\n" +
-                    "        const { person} = this.props;\n" +
-                    "        if(!person) return null;\n" +
-                    "        const {action} = this.props;\n" +
-                    "        //  console.log('action', action, this.state.changing )\n" +
-                    "        let buttons = <Link className=\"btn btn-success btn-block\" to=\"/\">OK</Link>\n" +
-                    "        if (action === PERSON_ACTIONS.NEW_PERSON ||\n" +
-                    "             action === PERSON_ACTIONS.EDIT_PERSON ||\n" +
-                    "             action === PERSON_ACTIONS.UPDATE_PERSON_SUCCESS ||\n" +
-                    "             action === PERSON_ACTIONS.ADD_PERSON_SUCCESS){\n" +
-                    "            buttons =\n" +
-                    "            <>\n" +
-                    "                <Link className=\"btn btn-warning mr-3\" to=\"/\">Cancel</Link>\n" +
-                    "                <Button variant=\"success\" type=\"submit\">\n" +
-                    "                    Save Changes\n" +
-                    "                </Button>\n" +
-                    "            </>\n" +
-                    "        }\n" +
-                    "\n" +
-                    "        let readOnly = false;\n" +
-                    "        let spanOffset = { span: 3, offset: 6 }\n" +
-                    "        let title =\"View\";\n" +
-                    "        switch(action) {\n" +
-                    "            case PERSON_ACTIONS.VIEW_PERSON: \n" +
-                    "                title = \"View\"; \n" +
-                    "                readOnly = true;\n" +
-                    "                spanOffset = { span: 3, offset: 6 };\n" +
-                    "                break;\n" +
-                    "            case PERSON_ACTIONS.UPDATE_PERSON_SUCCESS:\n" +
-                    "            case PERSON_ACTIONS.EDIT_PERSON:\n" +
-                    "                title = \"Edit\"; \n" +
-                    "                readOnly = false;\n" +
-                    "                spanOffset = { span: 3, offset: 9 };\n" +
-                    "\n" +
-                    "                break;\n" +
-                    "\n" +
-                    "            case PERSON_ACTIONS.ADD_PERSON_SUCCESS:\n" +
-                    "            case PERSON_ACTIONS.NEW_PERSON: \n" +
-                    "                title = \"New\"; \n" +
-                    "                readOnly = false;\n" +
-                    "                spanOffset = { span: 3, offset: 9 };\n" +
-                    "\n" +
-                    "                break;\n" +
-                    "            default: break;\n" +
-                    "        }\n" +
-                    "        const id = this.state.changing ?   this.state.person.id: this.props.person.id;\n" +
-                    "        const firstname = this.state.changing ?   this.state.person.firstname: this.props.person.firstname;\n" +
-                    "        const lastname = this.state.changing ?   this.state.person.lastname: this.props.person.lastname;\n" +
-                    "        const birthdate = this.state.changing \n" +
-                    "            ? dayjs(this.state.birthdate).format('YYYY-MM-DD')\n" +
-                    "            : dayjs(this.props.person.birthdate).format('YYYY-MM-DD')\n" +
-                    "        const ismodified = this.state.changing ?   this.state.person.ismodified: this.props.person.ismodified;\n" +
-                    "        const timestamp = this.state.changing \n" +
-                    "            ? dayjs(this.state.timestamp).format('DD/MM/YYYY HH:mm:ss')\n" +
-                    "            : dayjs(this.props.person.timestamp).format('DD/MM/YYYY HH:mm:ss')\n" +
-                    "        const salary =  !readOnly ? this.state.salary : numeral(this.props.person.salary).format('\$0,0.00');\n"
-
+           "    render() {\n" +
+                   "        const { person} = this.props;\n" +
+                   "        if(!person) return null;\n" +
+                   "        const {action} = this.props;\n" +
+                   "        //  console.log('action', action, this.state.changing )\n" +
+                   "        let buttons = <Link className=\"btn btn-success btn-block\" to=\"/personTable\">OK</Link>\n" +
+                   "        if (action === PERSON_ACTIONS.NEW_PERSON ||\n" +
+                   "             action === PERSON_ACTIONS.EDIT_PERSON ||\n" +
+                   "             action === PERSON_ACTIONS.UPDATE_PERSON_SUCCESS ||\n" +
+                   "             action === PERSON_ACTIONS.ADD_PERSON_SUCCESS){\n" +
+                   "            buttons =\n" +
+                   "            <>\n" +
+                   "                <Link className=\"btn btn-warning mr-3\" to=\"/personTable\">Cancel</Link>\n" +
+                   "                <Button variant=\"success\" type=\"submit\">\n" +
+                   "                    Save Changes\n" +
+                   "                </Button>\n" +
+                   "            </>\n" +
+                   "        }\n" +
+                   "\n" +
+                   "        let readOnly = false;\n" +
+                   "        let spanOffset = { span: 3, offset: 6 }\n" +
+                   "        let title =\"View\";\n" +
+                   "        switch(action) {\n" +
+                   "            case PERSON_ACTIONS.VIEW_PERSON: \n" +
+                   "                title = \"View\"; \n" +
+                   "                readOnly = true;\n" +
+                   "                spanOffset = { span: 3, offset: 6 };\n" +
+                   "                break;\n" +
+                   "            case PERSON_ACTIONS.UPDATE_PERSON_SUCCESS:\n" +
+                   "            case PERSON_ACTIONS.EDIT_PERSON:\n" +
+                   "                title = \"Edit\"; \n" +
+                   "                readOnly = false;\n" +
+                   "                spanOffset = { span: 3, offset: 9 };\n" +
+                   "\n" +
+                   "                break;\n" +
+                   "\n" +
+                   "            case PERSON_ACTIONS.ADD_PERSON_SUCCESS:\n" +
+                   "            case PERSON_ACTIONS.NEW_PERSON: \n" +
+                   "                title = \"New\"; \n" +
+                   "                readOnly = false;\n" +
+                   "                spanOffset = { span: 3, offset: 9 };\n" +
+                   "\n" +
+                   "                break;\n" +
+                   "            default: break;\n" +
+                   "        }\n" +
+                   "        const id = this.state.changing ?   this.state.id: this.props.person.id;\n" +
+                   "        const firstname = this.state.changing ?   this.state.firstname: this.props.person.firstname;\n" +
+                   "        const lastname = this.state.changing ?   this.state.lastname: this.props.person.lastname;\n" +
+                   "        const birthdate = this.state.changing \n" +
+                   "            ? dayjs(this.state.birthdate).format('YYYY-MM-DD')\n" +
+                   "            : dayjs(this.props.person.birthdate).format('YYYY-MM-DD')\n" +
+                   "        const ismodified = this.state.changing ?   this.state.ismodified: this.props.person.ismodified;\n" +
+                   "        const timestamp = this.state.changing \n" +
+                   "            ? dayjs(this.state.timestamp).format('DD/MM/YYYY HH:mm:ss')\n" +
+                   "            : dayjs(this.props.person.timestamp).format('DD/MM/YYYY HH:mm:ss')\n" +
+                   "        const salary =  !readOnly ? this.state.salary : numeral(this.props.person.salary).format('\$0,0.00');\n"
         assertEquals(expected, render)
 
     }
@@ -228,21 +227,21 @@ class GenerateReactJSEditTest {
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridfirstname\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">firstname</Form.Label>\n" +
-                    "                                <Form.Control name=\"firstname\" type=\"text\" placeholder=\"firstname\" value={firstname} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"firstname\" type=\"text\" placeholder=\"firstname\" value={firstname} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter firstname.\n" +
                     "                                </Form.Control.Feedback>\n" +
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridlastname\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">lastname</Form.Label>\n" +
-                    "                                <Form.Control name=\"lastname\" type=\"text\" placeholder=\"lastname\" value={lastname} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"lastname\" type=\"text\" placeholder=\"lastname\" value={lastname} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter lastname.\n" +
                     "                                </Form.Control.Feedback>\n" +
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridbirthdate\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">birthdate</Form.Label>\n" +
-                    "                                <Form.Control name=\"birthdate\" type=\"date\" placeholder=\"birthdate\" value={birthdate} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"birthdate\" type=\"date\" placeholder=\"birthdate\" value={birthdate} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter birthdate.\n" +
                     "                                </Form.Control.Feedback>\n" +
@@ -251,21 +250,21 @@ class GenerateReactJSEditTest {
                     "                        <Form.Row>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridismodified\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">ismodified</Form.Label>\n" +
-                    "                                <Form.Control name=\"ismodified\" type=\"checkbox\" placeholder=\"ismodified\" value={ismodified} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"ismodified\" type=\"checkbox\" placeholder=\"ismodified\" checked={ismodified} onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter ismodified.\n" +
                     "                                </Form.Control.Feedback>\n" +
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridtimestamp\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">timestamp</Form.Label>\n" +
-                    "                                <Form.Control name=\"timestamp\" type=\"text\" placeholder=\"timestamp\" value={timestamp} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"timestamp\" type=\"text\" placeholder=\"timestamp\" value={timestamp} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter timestamp.\n" +
                     "                                </Form.Control.Feedback>\n" +
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridsalary\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">salary</Form.Label>\n" +
-                    "                                <Form.Control name=\"salary\" type=\"text\" placeholder=\"salary\" value={salary} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"salary\" type=\"text\" placeholder=\"salary\" value={salary} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter salary.\n" +
                     "                                </Form.Control.Feedback>\n" +
@@ -296,7 +295,7 @@ class GenerateReactJSEditTest {
     fun generateComponentFormPersonTest() {
         val typeList = getTypeListPerson()
         val component = GenerateReactJSEdit.generateComponentForm("person", typeList)
-        println(component)
+//        println(component)
         val expected =
             "        return (\n" +
                     "            <>\n" +
@@ -310,14 +309,14 @@ class GenerateReactJSEditTest {
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridfirstname\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">firstname</Form.Label>\n" +
-                    "                                <Form.Control name=\"firstname\" type=\"text\" placeholder=\"firstname\" value={firstname} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"firstname\" type=\"text\" placeholder=\"firstname\" value={firstname} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter firstname.\n" +
                     "                                </Form.Control.Feedback>\n" +
                     "                            </Form.Group>\n" +
                     "                            <Form.Group as={Col} controlId=\"formGridlastname\">\n" +
                     "                                <Form.Label className=\"font-weight-bold\">lastname</Form.Label>\n" +
-                    "                                <Form.Control name=\"lastname\" type=\"text\" placeholder=\"lastname\" value={lastname} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                    "                                <Form.Control name=\"lastname\" type=\"text\" placeholder=\"lastname\" value={lastname} required onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                     "                                <Form.Control.Feedback type=\"invalid\">\n" +
                     "                                  Please enter lastname.\n" +
                     "                                </Form.Control.Feedback>\n" +

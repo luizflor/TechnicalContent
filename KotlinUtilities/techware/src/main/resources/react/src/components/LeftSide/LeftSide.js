@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { getInputChange } from '../../utilities/utils';
+import {Constants} from '../../utilities/constants';
 
 export class LeftSide extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            links: ['person','person2'],
+            links: Constants.typesList,
             filtered: ""
         }
     }

@@ -4,15 +4,12 @@ import com.techware.utilities.GenerateNodeJS.Companion.generateBatchFiles
 import com.techware.utilities.GenerateNodeJS.Companion.generateFakeNodeJS
 import com.techware.utilities.GenerateNodeJS.Companion.generateFakeNodeJSapi
 import com.techware.utilities.GenerateNodeJS.Companion.generateFakeNodeJScsv
-import com.techware.utilities.GenerateNodeJS.Companion.generateUnixBatchCsv
-import com.techware.utilities.GenerateNodeJS.Companion.generateUnixBatchJson
-import com.techware.utilities.GenerateNodeJS.Companion.generateWindowsBatchCsv
-import com.techware.utilities.GenerateNodeJS.Companion.generateWindowsBatchJson
-import com.techware.utilities.Type
+import com.techware.utilities.GenerateNodeJS.Companion.generateIndex
+import com.techware.utilities.GenerateNodeJS.Companion.generateIndexJson
+import com.techware.utilities.GenerateNodeJS.Companion.generateUnixJson
+import com.techware.utilities.GenerateNodeJS.Companion.generateWindowsJson
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.io.File
-import java.lang.StringBuilder
 
 class GenerateFakeJsonTest {
     @Test
@@ -84,9 +81,52 @@ class GenerateFakeJsonTest {
     }
 
     @Test
+    fun generateIndexText() {
+        val classNames = arrayListOf("person", "person2")
+        val index = generateIndex(classNames)
+        println(index)
+
+        val expected =
+            "module.exports = function () {\n" +
+                    "var person = require(\"../nodejs/Person/Person\");\n" +
+                    "var person2 = require(\"../nodejs/Person2/Person2\");\n" +
+                    "        return {\n" +
+                    "            person: person().Person,\n" +
+                    "            person2: person2().Person2,\n" +
+                    "        }\n" +
+                    "}\n"
+
+        assertEquals(expected, index)
+    }
+
+    @Test
+    fun generateUnixJsonTest() {
+        val json = generateUnixJson()
+        println(json)
+        val expected =
+            "#!/usr/bin/env bash\n" +
+                    "json-server --port 3001 index.js\n"
+        assertEquals(expected, json)
+    }
+
+    @Test
+    fun generateWindowsJsonTest() {
+        val json = generateWindowsJson()
+        println(json)
+        val expected =
+                    "json-server --port 3001 index.js\n"
+        assertEquals(expected, json)
+    }
+    @Test
     fun generateFakeNodeJSTest() {
         val className ="person"
         generateFakeNodeJS(fileName =  FILE_NAME_PERSON1,className=className,packageName = "",targetFolder = PATH_DESTINATION_NODEJS)
+    }
+
+    @Test
+    fun generateFakeIndexJsonTest() {
+        val classNames = arrayListOf("person", "person2")
+        generateIndexJson(classNames=classNames, targetFolder = PATH_DESTINATION_NODEJS)
     }
 
 

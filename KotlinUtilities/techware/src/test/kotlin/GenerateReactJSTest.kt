@@ -1,5 +1,4 @@
-import com.techware.react.GenerateReactJS
-import com.techware.react.GenerateReactJSEdit
+import com.techware.react.*
 //import com.techware.react.GenereateReactJSEdit.Companion.getFieldList
 import com.techware.utilities.Descriptor
 import com.techware.utilities.Type
@@ -28,7 +27,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateEditIndexTest() {
-        val index =GenerateReactJS.generatedEditIndex("person")
+        val index =GenerateReactJSEdit.generatedEditIndex("person")
 //        println(index)
         val expected =
             "export {default} from './PersonEdit';"
@@ -37,7 +36,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateTableIndexTest() {
-        val index =GenerateReactJS.generateTableIndex("person")
+        val index =GenerateReactJSTable.generateTableIndex("person")
 //        println(index)
         val expected =
             "export {default} from './PersonTable';"
@@ -46,7 +45,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateFakeActionType() {
-        val actionType=GenerateReactJS.generateActionTypes("person")
+        val actionType= GenerateReactJSActions.generateActionTypes("person")
 //        println(actionType)
 
         val actionTypeExpected =
@@ -77,7 +76,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateActionTest() {
-        val action = GenerateReactJS.generateAction("person")
+        val action = GenerateReactJSActions.generateAction("person")
 //        println(action)
         val expected =
             "import Axios, { ApiEndpoints, Constants } from '../utilities';\n" +
@@ -225,7 +224,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateActionIndexText() {
-        val actionIndex = GenerateReactJS.generateActionIndex(arrayListOf("person", "person2"))
+        val actionIndex = GenerateReactJSActions.generateActionIndex(arrayListOf("person", "person2"))
 //        println(actionIndex)
         val expected = "export {notifyInfo, notifyError, notifyWarning, notifyClear} from './notifyMessage'\n" +
                 "export{getPerson, viewPerson, editPerson, updatePerson, addPerson, deletePerson, newPerson} from './person'\n" +
@@ -236,7 +235,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateReducerText() {
-        val reducer = GenerateReactJS.generateReducers("person")
+        val reducer = GenerateReactJSReducers.generateReducers("person")
 //        println(reducer)
 
         val expected =
@@ -380,7 +379,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateComponentTableHeaderTest() {
-        val componentHeader = GenerateReactJS.generateComponentTableHeader("person2")
+        val componentHeader = GenerateReactJSTable.generateComponentTableHeader("person2")
 //        println(componentHeader)
         val expected =
                     "import React, { Component } from 'react'\n" +
@@ -513,7 +512,7 @@ class GenerateReactJSTest {
     fun generateComponentTableFieldsTest() {
         val typeList = getTypeList()
 
-        val componentFields = GenerateReactJS.generateComponentTableFields(typeList)
+        val componentFields = GenerateReactJSTable.generateComponentTableFields(typeList)
 //        println(componentFields)
 
         val expected =
@@ -559,7 +558,7 @@ class GenerateReactJSTest {
 
     @Test
     fun generateComponentTableTrailerTest() {
-        val component = GenerateReactJS.generateComponentTableTrailer("person2")
+        val component = GenerateReactJSTable.generateComponentTableTrailer("person2")
 //        println(component)
         val expected=
             "            { dataField: 'df1', text: 'Action', isDummyField: true,\n" +
@@ -692,7 +691,7 @@ class GenerateReactJSTest {
 
         // generate index file
         val indexFileName = "$pathEdit/index.js"
-        val indexEdit =GenerateReactJS.generatedEditIndex(typeName)
+        val indexEdit =GenerateReactJSEdit.generatedEditIndex(typeName)
         File(indexFileName).writeText(indexEdit)
 
         // generate edit file
@@ -721,19 +720,19 @@ class GenerateReactJSTest {
 
         // generate index file
         val indexTableFileName = "$pathTable/index.js"
-        val indexTable =GenerateReactJS.generateTableIndex(typeName)
+        val indexTable =GenerateReactJSTable.generateTableIndex(typeName)
         File(indexTableFileName).writeText(indexTable)
 
         val sbt = StringBuilder()
-        sbt.appendln( GenerateReactJS.generateComponentTableHeader(typeName))
-        sbt.appendln(GenerateReactJS.generateComponentTableFields(typeList))
-        sbt.appendln(GenerateReactJS.generateComponentTableTrailer(typeName))
+        sbt.appendln( GenerateReactJSTable.generateComponentTableHeader(typeName))
+        sbt.appendln(GenerateReactJSTable.generateComponentTableFields(typeList))
+        sbt.appendln(GenerateReactJSTable.generateComponentTableTrailer(typeName))
 
         val table = sbt.toString()
         val tableFileName =  "$pathTable/${typeName.capitalize()}Table.js"
         File(tableFileName).writeText(table)
 
-        val css = GenerateReactJS.generateTableCss()
+        val css = GenerateReactJSTable.generateTableCss()
         val cssFileName ="$pathTable/${typeName.capitalize()}Table.css"
         File(cssFileName).writeText(css)
     }
@@ -741,8 +740,8 @@ class GenerateReactJSTest {
     @Test
     fun generateReducerIndexTest() {
         val classNames = arrayListOf<String>("person", "person2")
-        val reducerIndex = GenerateReactJS.generateReducerIndex(classNames)
-        println(reducerIndex)
+        val reducerIndex = GenerateReactJSReducers.generateReducerIndex(classNames)
+//        println(reducerIndex)
 
         val expected =
             "import {combineReducers} from 'redux';\n" +
@@ -760,7 +759,7 @@ class GenerateReactJSTest {
     @Test
     fun generateApiEndpointsTest() {
         val classNames = arrayListOf<String>("person", "person2")
-        val endpoint = GenerateReactJS.generateApiEndpoints(classNames)
+        val endpoint = GenerateReactJSCommon.generateApiEndpoints(classNames)
         //println(endpoint)
         val expected =
             "export const ApiEndpoints= {\n" +
@@ -773,13 +772,13 @@ class GenerateReactJSTest {
     @Test
     fun generateConstantsTest() {
         val classNames = arrayListOf<String>("person", "person2")
-        val constants = GenerateReactJS.generateConstants(classNames)
+        val constants = GenerateReactJSCommon.generateConstants(classNames)
 //        println(constants)
 
         val expected =
             "export const Constants= {\n" +
                     "    itemsPerPage: 50,\n" +
-                    "    typesList: [''person','person2']\n" +
+                    "    typesList: ['person','person2']\n" +
                     "}\n"
         assertEquals(expected, constants)
 
@@ -788,8 +787,8 @@ class GenerateReactJSTest {
     @Test
     fun generateLayoutTest() {
         val classNames = arrayListOf<String>("person", "person2")
-        val layout = GenerateReactJS.generateLayout(classNames)
-        println(layout)
+        val layout = GenerateReactJSCommon.generateLayout(classNames)
+//        println(layout)
 
         val expected =
             "import React, { Component } from 'react';\n" +
@@ -821,7 +820,7 @@ class GenerateReactJSTest {
                     "                <TopNav />\n" +
                     "                <NotifyMessage onClose={this.onClose} notifyMessage={notifyMessage} />\n" +
                     "\n" +
-                    "                <Row>\n" +
+                    "                <Row  className=\"no-gutters\">\n" +
                     "                    <Col md={1}>\n" +
                     "                        <LeftSide />\n" +
                     "                    </Col>\n" +
@@ -849,7 +848,6 @@ class GenerateReactJSTest {
                     "})\n" +
                     "\n" +
                     "export default connect(mapStateToProps, { notifyClear })(Layout);\n"
-
         assertEquals(expected,layout)
     }
 
@@ -859,8 +857,13 @@ class GenerateReactJSTest {
         GenerateReactJS.copyFiles(PATH_DESTINATION_REACTJS)
         GenerateReactJS.generateReactJS(FILE_NAME_PERSON1,"person","", PATH_DESTINATION_REACTJS)
         GenerateReactJS.generateReactJS(FILE_NAME_PERSON2,"person2","", PATH_DESTINATION_REACTJS)
-        GenerateReactJS.generateActionReducerIndex(PATH_DESTINATION_REACTJS, arrayListOf("person","person2"))
+        GenerateReactJS.generateActionReducerIndexFiles(PATH_DESTINATION_REACTJS, arrayListOf("person","person2"))
 //        GenerateReactJS.generateActionReducerIndex(PATH_DESTINATION_REACTJS, arrayListOf())
+    }
+
+    @Test
+    fun generateReactJSFilesTest(){
+        GenerateReactJS.generateReactJSFiles(targetDescriptor = DESCRIPTOR_FILES, targetFolder = PATH_DESTINATION_REACTJS)
     }
 
     companion object {
@@ -868,5 +871,6 @@ class GenerateReactJSTest {
         const val COMPONENTS = "/src/components"
         const val FILE_NAME_PERSON1 = "./src/test/resources/Descriptors/person1.txt"
         const val FILE_NAME_PERSON2 = "./src/test/resources/Descriptors/person2.txt"
+        const val DESCRIPTOR_FILES = "./src/test/resources/Descriptors"
     }
 }

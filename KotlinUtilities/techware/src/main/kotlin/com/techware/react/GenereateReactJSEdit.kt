@@ -1,10 +1,38 @@
 package com.techware.react
 
 import com.techware.utilities.Type
+import java.io.File
 import java.lang.StringBuilder
 
 class GenerateReactJSEdit {
     companion object {
+
+        fun generateReactJSEdit(className: String, targetFolder: String ,descriptorList: List<Type>) {
+            val pathEdit = "$targetFolder/${ReactJSConstants.COMPONENTS}/${className.capitalize()}/${className.capitalize()}Edit"
+            File(pathEdit).mkdirs()
+            // generate index file
+            val indexFileName = "$pathEdit/index.js"
+            val indexEdit =GenerateReactJSEdit.generatedEditIndex(className)
+            File(indexFileName).writeText(indexEdit)
+
+            // generate edit file
+            val sb = StringBuilder()
+            sb.appendln(GenerateReactJSEdit.generatedImport(className))
+            sb.appendln(GenerateReactJSEdit.generateConstructor(descriptorList))
+            sb.appendln(GenerateReactJSEdit.generateComponentDidMount(className,descriptorList))
+            sb.appendln(GenerateReactJSEdit.generateComponentHandleSubmit(className,descriptorList))
+            sb.appendln(GenerateReactJSEdit.generateComponentRender(className,descriptorList))
+            sb.appendln(GenerateReactJSEdit.generateComponentForm(className,descriptorList))
+            val edit = sb.toString()
+            val editFileName = "$pathEdit/${className.capitalize()}Edit.js"
+            File(editFileName).writeText(edit)
+        }
+
+        fun generatedEditIndex(typeName: String): String {
+            val index = "export {default} from './${typeName.capitalize()}Edit';"
+            return index
+        }
+
         fun generatedImport(typeName: String): String {
             val component =
                 "import React, { Component } from 'react'\n" +
@@ -87,8 +115,9 @@ class GenerateReactJSEdit {
                     "        event.preventDefault();")
 
             val fieldList = getFieldList(fieldTypes)
+            val fieldListWithoutBoolean = getFieldList(fieldTypes.filter { it.fieldType!= "boolean" })
             sb.appendln("        const { ${fieldList} } = this.state;" )
-            sb.appendln("        if ( ${fieldList.replace(","," &&")} ) {")
+            sb.appendln("        if ( ${fieldListWithoutBoolean.replace(","," &&")} ) {")
             sb.appendln("            const new${typeName.capitalize()} = {")
             sb.appendln("               $fieldList")
             sb.appendln("            }")
@@ -115,14 +144,14 @@ class GenerateReactJSEdit {
 
             sb.appendln("        const {action} = this.props;\n" +
                     "        //  console.log('action', action, this.state.changing )\n" +
-                    "        let buttons = <Link className=\"btn btn-success btn-block\" to=\"/\">OK</Link>\n" +
+                    "        let buttons = <Link className=\"btn btn-success btn-block\" to=\"/${typeName}Table\">OK</Link>\n" +
                     "        if (action === ${typeName.toUpperCase()}_ACTIONS.NEW_${typeName.toUpperCase()} ||\n" +
                     "             action === ${typeName.toUpperCase()}_ACTIONS.EDIT_${typeName.toUpperCase()} ||\n" +
                     "             action === ${typeName.toUpperCase()}_ACTIONS.UPDATE_${typeName.toUpperCase()}_SUCCESS ||\n" +
                     "             action === ${typeName.toUpperCase()}_ACTIONS.ADD_${typeName.toUpperCase()}_SUCCESS){\n" +
                     "            buttons =\n" +
                     "            <>\n" +
-                    "                <Link className=\"btn btn-warning mr-3\" to=\"/\">Cancel</Link>\n" +
+                    "                <Link className=\"btn btn-warning mr-3\" to=\"/${typeName}Table\">Cancel</Link>\n" +
                     "                <Button variant=\"success\" type=\"submit\">\n" +
                     "                    Save Changes\n" +
                     "                </Button>\n" +
@@ -206,19 +235,24 @@ class GenerateReactJSEdit {
                             "                            </Form.Group>")
                 } else  {
                     var controlType = "text"
+                    var valueChecked = "value={${e.fieldName}} required"
                     when (e.fieldType) {
-                        "boolean"-> controlType = "checkbox"
+                        "boolean"-> {
+                            controlType = "checkbox"
+                            valueChecked = "checked={${e.fieldName}}"
+                        }
                         "date" -> controlType="date"
                         else -> controlType="text"
                     }
 
                     sb.appendln("                            <Form.Group as={Col} controlId=\"formGrid${e.fieldName}\">\n" +
                             "                                <Form.Label className=\"font-weight-bold\">${e.fieldName}</Form.Label>\n" +
-                            "                                <Form.Control name=\"${e.fieldName}\" type=\"${controlType}\" placeholder=\"${e.fieldName}\" value={${e.fieldName}} onChange={this.handleInputChange} required plaintext={readOnly} readOnly={readOnly} />\n" +
+                            "                                <Form.Control name=\"${e.fieldName}\" type=\"${controlType}\" placeholder=\"${e.fieldName}\" ${valueChecked} onChange={this.handleInputChange} plaintext={readOnly} readOnly={readOnly} />\n" +
                             "                                <Form.Control.Feedback type=\"invalid\">\n" +
                             "                                  Please enter ${e.fieldName}.\n" +
                             "                                </Form.Control.Feedback>\n" +
                             "                            </Form.Group>")
+
                     if (i.rem(3) == 0 ) {
                        sb.append("                        </Form.Row>\n")
                         if(i < fieldTypes.size - 1) {
