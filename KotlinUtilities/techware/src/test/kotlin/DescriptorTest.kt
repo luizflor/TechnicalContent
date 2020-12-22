@@ -1,6 +1,6 @@
-import com.techware.utilities.*
-import com.techware.utilities.Descriptor.Companion.generateDescriptor
-import com.techware.utilities.Descriptor.Companion.types
+import com.techware.generate.*
+import com.techware.generate.Descriptor.Companion.generateDescriptor
+import com.techware.generate.Descriptor.Companion.types
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach

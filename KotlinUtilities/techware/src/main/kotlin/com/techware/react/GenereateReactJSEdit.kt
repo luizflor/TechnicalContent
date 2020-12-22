@@ -1,6 +1,6 @@
 package com.techware.react
 
-import com.techware.utilities.Type
+import com.techware.generate.Type
 import java.io.File
 import java.lang.StringBuilder
 

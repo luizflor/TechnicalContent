@@ -1,6 +1,6 @@
 package com.techware.react
 
-import com.techware.utilities.Descriptor
+import com.techware.generate.Descriptor
 import java.io.File
 
 class GenerateReactJS {

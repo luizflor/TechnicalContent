@@ -1,7 +1,7 @@
 import com.techware.react.*
 //import com.techware.react.GenereateReactJSEdit.Companion.getFieldList
-import com.techware.utilities.Descriptor
-import com.techware.utilities.Type
+import com.techware.generate.Descriptor
+import com.techware.generate.Type
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.File
