@@ -4,12 +4,15 @@ package com.techware.nodejs
 import com.techware.react.GenerateReactJS
 import com.techware.generate.Descriptor
 import com.techware.generate.Type
+import com.techware.react.ReactJSConstants
+import com.techware.utilities.JarFiles
 import java.io.File
 import java.lang.StringBuilder
 
 class GenerateNodeJS {
     companion object {
-        const val PACKAGE_JSON = "./src/main/resources/nodejs/package.json"
+//        const val PACKAGE_JSON = "./src/main/resources/nodejs/package.json"
+        const val PACKAGE_JSON = "nodejs"
         const val NODEJS = "./src/main/resources/nodejs"
 
         /**
@@ -31,7 +34,7 @@ class GenerateNodeJS {
          */
 
         fun generateNodeJSFiles(targetDescriptor: String, targetFolder: String) {
-            GenerateReactJS.copyFiles(targetFolder = targetFolder)
+//            GenerateReactJS.copyFiles(targetFolder = targetFolder)
             val fileList = File(targetDescriptor).walk().filter{it.name.contains(".txt")}
             val classNames = fileList.map { it.nameWithoutExtension }.toList()
             GenerateNodeJSIndex.generateIndexJson(classNames=classNames, targetFolder = targetFolder)
@@ -62,8 +65,8 @@ class GenerateNodeJS {
 
                 generateBatchFiles(className = className, targetFolder = targetFolder)
 
-                copyPackageJson(targetFolder)
             }
+                copyPackageJson(targetFolder)
         }
 
         fun generateFakeNodeJS(fileName: String, className: String, packageName: String, targetFolder: String) {
@@ -88,7 +91,7 @@ class GenerateNodeJS {
 
             generateBatchFiles(className = className, targetFolder = targetFolder)
 
-            copyPackageJson(targetFolder)
+//            copyPackageJson(targetFolder)
 
         }
 
@@ -221,7 +224,7 @@ class GenerateNodeJS {
         }
 
         fun copyPackageJson(targetFolder: String) {
-            File(PACKAGE_JSON).copyTo(File("$targetFolder/package.json"), true)
+            JarFiles.copyJarFiles(PACKAGE_JSON, targetFolder)
         }
     }
 }

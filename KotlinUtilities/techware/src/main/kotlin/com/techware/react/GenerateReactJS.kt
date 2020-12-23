@@ -1,7 +1,14 @@
 package com.techware.react
 
 import com.techware.generate.Descriptor
+import com.techware.utilities.JarFiles
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.net.URI
+import java.util.jar.JarFile
+
 
 class GenerateReactJS {
     companion object {
@@ -34,11 +41,12 @@ class GenerateReactJS {
             }
         }
 
+
         /**
          * copy a react template into the target folder
          */
         fun copyFiles(targetFolder: String) {
-            File(ReactJSConstants.REACT_FILES).copyRecursively(File(targetFolder), true)
+            JarFiles.copyJarFiles(ReactJSConstants.REACT_FILES,targetFolder)
         }
 
         /**

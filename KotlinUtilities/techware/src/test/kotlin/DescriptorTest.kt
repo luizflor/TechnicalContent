@@ -108,26 +108,26 @@ class DescriptorTest {
         val instant = "2/29/2020".fromDateToInstant()
         assertEquals("2020-02-29T00:00:00Z",instant.toString())
 
-        val date = instant?.toDate()
+        val date = instant.toDate()
         assertEquals("2020-02-29", date.toString())
         assertEquals("2/29/2020", date.toStringDate())
 
-        assertEquals(2020,date?.year)
-        assertEquals(2,date?.monthValue)
-        assertEquals(29,date?.dayOfMonth)
+        assertEquals(2020, date.year)
+        assertEquals(2, date.monthValue)
+        assertEquals(29, date.dayOfMonth)
         println(instant)
         println(date)
 
-        val instantDateString = instant?.toStringDate()
+        val instantDateString = instant.toStringDate()
         println(instantDateString)
         assertEquals("2/29/2020",instantDateString)
-        val instantDateTimeString = instant?.toStringDateTime()
+        val instantDateTimeString = instant.toStringDateTime()
         assertEquals("2020-02-29T00:00:00Z",instantDateTimeString)
         println(instantDateTimeString)
 
         val instant2 = "2020-02-29T00:00:00Z".fromDateTimeToInstant()
         println(instant2)
-        assertEquals("2020-02-29T00:00:00Z", instant2?.toStringDateTime())
+        assertEquals("2020-02-29T00:00:00Z", instant2.toStringDateTime())
 
     }
 
@@ -173,7 +173,7 @@ class DescriptorTest {
                 "ismodified, boolean\n" +
                 "timestamp, instant\n" +
                 "salary, double\n"
-        val person2List= descriptorPerson2Str.split('\n')
+//        val person2List= descriptorPerson2Str.split('\n')
 
         val generatedPerson2Class = Descriptor.generateClassFromString(descriptorPerson2Str, "Person2")
         println(generatedPerson2Class)
