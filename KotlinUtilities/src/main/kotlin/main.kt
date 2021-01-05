@@ -1,9 +1,5 @@
-import com.techware.generate.Generate
-import com.techware.generate.GenerateKotlinImpl
-import com.techware.generate.GenerateReactJS
-import com.techware.generate.GenerateSolution
+import com.techware.generate.*
 import com.techware.generate.ObjectParser.Companion.parse
-import com.techware.generate.GenerateNodeJS
 import com.techware.utilities.PropertiesFile
 import java.io.File
 import java.nio.file.Files
@@ -17,7 +13,7 @@ enum class Config {
     descriptors,
     targetNodeJS,
     targetReactJS,
-
+    targetSpringAPI,
 }
 
 fun main(args: Array<String>) {
@@ -34,6 +30,7 @@ fun main(args: Array<String>) {
     //generateNodeJS(configFileName, "person")
     generateReactJS(configFileName)
     generateNodeJS(configFileName)
+    generateSpringAPI(configFileName)
 
 }
 
@@ -120,4 +117,13 @@ fun generateNodeJS(configFileName: String){
     var generate: GenerateSolution = GenerateNodeJS()
     generate.generateFiles(targetDescriptor = descriptors, targetFolder = nodeJS)
     println("nodejs files created at $nodeJS")
+}
+
+fun generateSpringAPI(configFileName: String){
+    val properties =PropertiesFile.readPropertiesFile(configFileName)
+    val descriptors = properties[Config.descriptors.name]!!.toString()
+    val targetSpringAPI = properties[Config.targetSpringAPI.name]!!.toString()
+    var generate: GenerateSolution = GenerateSpringApi()
+    generate.generateFiles(targetDescriptor = descriptors, targetFolder = targetSpringAPI)
+    println("spring files files created at $targetSpringAPI")
 }
