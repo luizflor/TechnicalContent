@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+    </Properties>
+    <Appenders>
+        <Console name="LogInJSON" target="SYSTEM_OUT">
+<!--            <PatternLayout-->
+<!--            pattern="\{'level':'%-5level','timestamp':'%d{ISO8601}{GMT+0}','class':'%C','exception':'%xEx{full}','location':'%l','processId':'%pid','threadId':'%T','threadName':'%t','trackingId':'%X{trackingId}','host':'${hostName}','logger':'%logger{36}','message':'%msg'\}%n"-->
+<!--            />-->
+
+            <JsonLayout complete="false" compact="false">
+                <KeyValuePair key="trackingId" value="$${ctx:trackingId}" />
+                 <KeyValuePair key="host" value="$${hostName}" />
+            </JsonLayout>
+        </Console>
+        <Http name="Http" url="https://localhost:25001/api/log">
+<!--            <PatternLayout-->
+<!--                    pattern="\{'level':'%-5level','timestamp':'%d{ISO8601}{GMT+0}','class':'%C','exception':'%xEx{full}','location':'%l','processId':'%pid','threadId':'%T','threadName':'%t','trackingId':'%X{trackingId}','host':'${hostName}','logger':'%logger{36}','message':'%msg'\}%n"-->
+<!--            />-->
+            <JsonLayout complete="false" compact="false">
+                <KeyValuePair key="trackingId" value="$${ctx:trackingId}" />
+                <KeyValuePair key="host" value="$${hostName}" />
+            </JsonLayout>
+            <SSL>
+                <TrustStore location="./certificates/root.jks"      password="trustpass"/>
+            </SSL>
+        </Http>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.abhishek.log4j2" level="debug" additivity="false">
+            <AppenderRef ref="LogInJSON"/>
+            <AppenderRef ref="Http" />
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="LogInJSON"/>
+            <AppenderRef ref="Http" />
+        </Root>
+    </Loggers>
+</Configuration>
