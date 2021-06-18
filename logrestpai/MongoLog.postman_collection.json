@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "ee9ffcfa-b572-4f93-a44f-9ca7c67fea37",
+		"name": "MongoLog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "download csv logJson",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/logJson/betweenEntryDateTimeCSV?beginEntryDateTime=2021-06-10T01:03:45.226Z&endEntryDateTime=2021-06-11T01:03:45.258Z",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"logJson",
+						"betweenEntryDateTimeCSV"
+					],
+					"query": [
+						{
+							"key": "beginEntryDateTime",
+							"value": "2021-06-10T01:03:45.226Z"
+						},
+						{
+							"key": "endEntryDateTime",
+							"value": "2021-06-11T01:03:45.258Z"
+						}
+					]
+				},
+				"description": "Download csv file"
+			},
+			"response": []
+		},
+		{
+			"name": "get logJson",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/logJson/betweenEntryDateTime?beginEntryDateTime=2021-06-10T01:03:45.226Z&endEntryDateTime=2021-06-11T01:03:45.258Z",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"logJson",
+						"betweenEntryDateTime"
+					],
+					"query": [
+						{
+							"key": "beginEntryDateTime",
+							"value": "2021-06-10T01:03:45.226Z"
+						},
+						{
+							"key": "endEntryDateTime",
+							"value": "2021-06-11T01:03:45.258Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get logJson by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/logJson/60c164f1647739395fcf069b",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"logJson",
+						"60c164f1647739395fcf069b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get logJson by trackingId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/logJson/trackingId/758903",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"logJson",
+						"trackingId",
+						"758903"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post logJson",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"level\": \"ERROR\",\n  \"timestamp\": \"2021-06-08T04:20:59,454\",\n  \"class\": \"App\",\n  \"exception\": \" java.lang.ArithmeticException: / by zero\\tat App.main(App.java:31) [main/:?]\",\n  \"location\": \"App.main(App.java:36)\",\n  \"processId\": \"83399\",\n  \"threadId\": \"1\",\n  \"threadName\": \"main\",\n  \"trackingId\": \"543916\",\n  \"host\": \"Luizs-MacBook-Pro.local\",\n  \"logger\": \"App\",\n  \"message\": \"Error Occurred\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:25001/api/logJson",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"logJson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get log by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/log/609564ba3d3da419a07d7171",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"log",
+						"609564ba3d3da419a07d7171"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get log by trackingId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:25001/api/log/trackingId/773560",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "25001",
+					"path": [
+						"api",
+						"log",
+						"trackingId",
+						"773560"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8091/api/logs",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"api",
+						"logs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
